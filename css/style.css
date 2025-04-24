@@ -507,3 +507,15 @@
     color: black;
 }
 
+.min-vh-50{
+    min-height: 50vh;
+}
+
+.primary-color{
+    color: #5B8D50;
+}
+
+.secondary-color{
+    color: #EDDC5F;
+}
+
