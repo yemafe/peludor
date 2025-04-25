@@ -85,7 +85,7 @@
             };
             document.cookie = `sessionToken=${encodeURIComponent(JSON.stringify(sessionData))}; path=/; max-age=${60 * 60 * 24}; secure; SameSite=Lax`;
             console.log('logado redirijoooo');
-            window.location.href = "index.twig";
+            window.location.href = "/";
         }
     </script>
 {% endblock %}

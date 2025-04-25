@@ -1,8 +1,9 @@
 <?php
 
-use Infrastructure\Services\CheckUserIsLoggedIn;
+use Peludors\Core\User\Infrastructure\Services\CheckUserIsLoggedIn;
 
 require_once __DIR__ . '/vendor/autoload.php';
+
 
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/templates');
 $twig = new \Twig\Environment($loader);
@@ -19,7 +20,7 @@ $routes = [
 ];
 
 if (array_key_exists($route, $routes)) {
-    CheckUserIsLoggedIn::class->__invoke();
+    (new CheckUserIsLoggedIn())();
     echo $twig->render($routes[$route]);
 } else {
     echo $twig->render('errorPage.twig', []);

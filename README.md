@@ -3,7 +3,11 @@ peludor website - about animals
 
 
 # Use composer for install dependencies
-composer intall
+composer install
+composer dump-autoload
+composer dump-autoload -o [comment]: # (clean cache and remap classes in composer autoload)
+
+
 
 ## Run php server
 php -S localhost:8000
