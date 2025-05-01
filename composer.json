@@ -1,11 +1,15 @@
 {
   "require": {
+    "php": ">=8.3.0",
     "twig/twig": "^3.0",
-    "ext-json": "*"
+    "ext-json": "*",
+    "mikecao/flight": "^3.15",
+    "illuminate/database": "^12.12"
   },
   "autoload": {
     "psr-4": {
-      "Peludors\\": "src/"
+      "Peludors\\": "src/",
+      "Db\\": "database/"
     }
   }
 }
