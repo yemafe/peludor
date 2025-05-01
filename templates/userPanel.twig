@@ -1,0 +1,49 @@
+
+{% extends "base.twig" %}
+
+{% block title %}Panel de usuario{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+{% endblock %}
+{% block content %}
+    <div class="container-xxl py-5 ">
+       <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+    <h3 class="mb-4">Mis datos</h3>
+    <form>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="name" placeholder="Tu nombre">
+                    <label for="name">Nombre</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="google" placeholder="Cuenta de google">
+                    <label for="email">Google</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="facebook" placeholder="Facebook">
+                    <label for="facebook">Facebook</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="instagram" placeholder="Instagram">
+                    <label for="instagram">Facebook</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-secondary rounded-pill py-3 px-5" type="submit">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>
+    </div>
+{% endblock %}

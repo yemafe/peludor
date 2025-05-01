@@ -37,7 +37,8 @@ $routes = [
     '/errorPage' => 'errorPage.twig',
     '/login' => 'login.twig',
     '/magazine' => 'magazine.twig',
-    '/obituary' => 'obituary.twig'
+    '/obituary' => 'obituary.twig',
+    '/userPanel' => 'userPanel.twig',
 ];
 
 if (array_key_exists($route, $routes)) {
