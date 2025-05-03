@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 use Peludors\Core\User\Infrastructure\Services\CheckUserIsLoggedIn;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -19,13 +21,13 @@ header(
     "base-uri 'self';"
 );
 
-//twig conf
-$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
-$twig = new \Twig\Environment($loader, [
-    'cache' => false, // false for development
-    'debug' => true, // true for development
-]);
-$twig->addExtension(new \Twig\Extension\DebugExtension());
+// REGISTRA Twig EN Flight *ANTES* de usar cualquier otra cosa
+Flight::register('view', Environment::class, [
+    new FilesystemLoader(__DIR__ . '/../templates')
+], function($twig) {
+});
+require_once __DIR__ . '/../routes/web.php';
+Flight::start();
 
 /*//Eloquent conf
 $capsule = new Capsule;
@@ -42,42 +44,3 @@ $capsule->addConnection([
 $capsule->setAsGlobal();
 $capsule->bootEloquent();*/
 
-//init Flight
-Flight::route('/', function () use ($twig) {
-    //$users = \Peludors\Models\User::all();
-    //echo $twig->render('home.twig', ['users' => $users]);
-    echo $twig->render('index.twig');
-});
-
-Flight::route('/login', function () use ($twig) {
-    echo $twig->render('login.twig');
-});
-
-Flight::route('/userPanel', function () use ($twig) {
-    echo $twig->render('userPanel.twig');
-});
-
-Flight::route('/obituary', function () use ($twig) {
-    echo $twig->render('obituary.twig');
-});
-
-Flight::start();
-
-
-/*$route = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$routes = [
-    '/' => 'index.twig',
-    '/about' => 'about.twig',
-    '/errorPage' => 'errorPage.twig',
-    '/login' => 'login.twig',
-    '/magazine' => 'magazine.twig',
-    '/obituary' => 'obituary.twig',
-    '/userPanel' => 'userPanel.twig',
-];
-
-if (array_key_exists($route, $routes)) {
-    (new CheckUserIsLoggedIn())();
-    echo $twig->render($routes[$route]);
-} else {
-    echo $twig->render('errorPage.twig', []);
-}*/

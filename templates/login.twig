@@ -5,8 +5,6 @@
     {{ parent() }}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="../assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 {% endblock %}
 {% block content %}
 
@@ -78,12 +76,13 @@
     <script>
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
+            //crear una solo cuando se le de al botón, probar mas
             const sessionData = {
                 userID: 123,
                 userName: profile.getName(),
                 userEmail: profile.getEmail()
             };
-            document.cookie = `sessionToken=${encodeURIComponent(JSON.stringify(sessionData))}; path=/; max-age=${60 * 60 * 24}; secure; SameSite=Lax`;
+            document.cookie = `peludorsToken=${encodeURIComponent(JSON.stringify(sessionData))}; path=/; max-age=${60 * 60 * 24}; secure; SameSite=Lax`;
             setTimeout(function() {
                 window.location.href = "/";
             }, 300); // (0.3 seconds)
