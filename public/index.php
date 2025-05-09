@@ -3,10 +3,13 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Peludors\Core\User\Infrastructure\Services\CheckUserIsLoggedIn;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Support\Facades\DB;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 // Google headers
 header(
     "Content-Security-Policy: " .
@@ -21,26 +24,39 @@ header(
     "base-uri 'self';"
 );
 
-// REGISTRA Twig EN Flight *ANTES* de usar cualquier otra cosa
-Flight::register('view', Environment::class, [
-    new FilesystemLoader(__DIR__ . '/../templates')
-], function($twig) {
-});
-require_once __DIR__ . '/../routes/web.php';
-Flight::start();
 
-/*//Eloquent conf
+//Eloquent conf
 $capsule = new Capsule;
 $capsule->addConnection([
     'driver'    => 'mysql',
-    'host'      => '194.163.134.195',
+    'host'      => '194.163.134.195', //http://db.eventiverse.es/
     'database'  => 'dev_peludors',
-    'username'  => 'user_pass',
-    'password'  => 'user',
+    'username'  => 'db_user_',
+    'password'  => 'tjdbd@26-3*rQmo(',
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix'    => '',
 ]);
 $capsule->setAsGlobal();
-$capsule->bootEloquent();*/
+$capsule->bootEloquent();
+
+// REGISTRA Twig EN Flight
+Flight::register('view', Environment::class, [
+    new FilesystemLoader(__DIR__ . '/../templates')
+], function($twig) {
+});
+require_once __DIR__ . '/../routes/web.php';
+//test REMOVE
+Flight::route('/test-db', function () {
+    try {
+        $result = Capsule::connection()->getPdo()->query('SELECT NOW()')->fetch();
+        echo '✅ Conexión exitosa. Hora del servidor MySQL: ' . $result[0];
+    } catch (Exception $e) {
+        echo '❌ Error de conexión: ' . $e->getMessage();
+    }
+});
+
+Flight::start();
+
+
 
