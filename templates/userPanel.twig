@@ -6,44 +6,67 @@
     {{ parent() }}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="../assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 {% endblock %}
 {% block content %}
-    <div class="container-xxl py-5 ">
-       <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-    <h3 class="mb-4">Mis datos</h3>
-    <form>
-        <div class="row g-3">
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="name" placeholder="Tu nombre">
-                    <label for="name">Nombre</label>
+
+    <div class="container">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            <h3 class="mb-4">Mis datos</h3>
+            <div class="row">
+                <div class="col-sm-4">
+
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <input type="email" class="form-control" id="google" placeholder="Cuenta de google">
-                    <label for="email">Google</label>
+                <div class="col-sm-6">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name" placeholder="Tu nombre">
+                                    <label for="name">Nombre</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="google" placeholder="Cuenta de google">
+                                    <label for="google">Google</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="facebook" placeholder="Facebook">
+                                    <label for="facebook">Facebook</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="instagram" placeholder="Instagram">
+                                    <label for="instagram">Facebook</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-secondary rounded-pill py-3 px-5" type="submit">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="facebook" placeholder="Facebook">
-                    <label for="facebook">Facebook</label>
+                <div class="col-sm-2">
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="/" onclick="signOut();"> Signout
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg font-size-24 ms-2" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                        </svg>
+                    </a>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="instagram" placeholder="Instagram">
-                    <label for="instagram">Facebook</label>
-                </div>
-            </div>
-            <div class="col-12">
-                <button class="btn btn-secondary rounded-pill py-3 px-5" type="submit">Guardar</button>
             </div>
         </div>
-    </form>
-</div>
     </div>
+
+    <script>
+        function signOut() {
+            document.cookie = "peludorsToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            setTimeout(function() {
+                window.location.href = "/";
+            }, 300); // (0.3 seconds)
+        }
+    </script>
 {% endblock %}
