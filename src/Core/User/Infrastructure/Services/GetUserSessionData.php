@@ -17,7 +17,7 @@ class GetUserSessionData
             }
             return $userData;
         } else {
-            throw new UserNotFound('User not logged in.');
+            throw new UserNotFound('UserModel not logged in.');
         }
     }
 }

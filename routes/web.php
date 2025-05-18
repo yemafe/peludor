@@ -1,27 +1,30 @@
 <?php
-
+$container = require __DIR__ . '/../src/Core/Config/Classes.php';
+use Peludors\Core\User\Application\GetUserByID\GetUserByID;
+use Peludors\Core\User\Infrastructure\Repository\UserMySQLRepository;
 use Peludors\Core\User\Infrastructure\Services\CheckUserIsLoggedIn;
 
-Flight::before('start', function (&$params, &$output) {
+Flight::set('di', $container);
+Flight::before('start', function (&$params, &$output) use ($container) {
     $check = new CheckUserIsLoggedIn();
     $check();
 });
 
-Flight::route('/', function (){
-    //$users = \Peludors\Models\User::all();
-    //echo $twig->render('home.twig', ['users' => $users]);
-    echo Flight::view()->render('index.twig');
+Flight::route('/', function () use ($container){
+    $getUserByID = $container->get(GetUserByID::class);
+    $user = $getUserByID(1);
+    echo Flight::view()->render('index.twig', ['user' => $user]);
 });
 
 
-Flight::route('/login', function (){
+Flight::route('/login', function () use ($container){
     echo Flight::view()->render('login.twig');
 });
 
-Flight::route('/userPanel', function (){
+Flight::route('/userPanel', function () use ($container){
     echo Flight::view()->render('userPanel.twig');
 });
 
-Flight::route('/obituary', function (){
+Flight::route('/obituary', function () use ($container){
     echo Flight::view()->render('obituary.twig');
 });
