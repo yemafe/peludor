@@ -13,8 +13,9 @@ class GetUserByID
         private UserRepository $userRepository
     ){
     }
-    public function __invoke(int $id): User
+    public function __invoke(GetUserByIDQuery $query): User
     {
+        $id = $query->id();
         try {
             return $this->userRepository->findByID($id);
         }catch (Exception $exception){

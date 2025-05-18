@@ -12,6 +12,9 @@
     <div class="container">
         <div class="wow fadeInUp" data-wow-delay="0.1s">
             <h3 class="mb-4">Mis datos</h3>
+            {% if user %}
+                {{ user.name }}
+            {% endif %}
             <div class="row">
                 <div class="col-sm-4">
 

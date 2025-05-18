@@ -32,15 +32,6 @@ Flight::register('view', Environment::class, [
 ], function($twig) {
 });
 require_once __DIR__ . '/../routes/web.php';
-//test REMOVE
-Flight::route('/test-db', function (){
-    try {
-        $result = Capsule::connection()->getPdo()->query('SELECT NOW()')->fetch();
-        echo '✅ Conexión exitosa. Hora del servidor MySQL: ' . $result[0];
-    } catch (Exception $e) {
-        echo '❌ Error de conexión: ' . $e->getMessage();
-    }
-});
 
 Flight::start();
 
