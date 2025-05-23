@@ -9,8 +9,8 @@ class CheckUserIsLoggedIn
     public function __invoke(): void
     {
         $view = Flight::view();
-        if (isset($_COOKIE['peludorsToken'])) {
-            $raw = urldecode($_COOKIE['peludorsToken']);
+        if (isset($_COOKIE['peludors'])) {
+            $raw = urldecode($_COOKIE['peludors']);
             $data = json_decode($raw, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($data)) {
                 if (!empty($data['userID']) && isset($data['userName']) && isset($data['userEmail'])) {

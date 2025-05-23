@@ -10,6 +10,6 @@ class UserMySQLRepository implements UserRepository
     public function findByID(int $id): ?User
     {
         $record = UserModel::where('id', $id)->first();
-        return $record ? new User($record->id, $record->name, $record->email, $record->createdAt) : null;
+        return $record ? new User($record->id, $record->email, (int)$record->createdAt, $record->name) : null;
     }
 }

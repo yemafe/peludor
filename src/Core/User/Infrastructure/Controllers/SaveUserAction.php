@@ -12,14 +12,12 @@ class SaveUserAction
 
     public function __construct()
     {
-        $this->clientId = getenv('GOOGLE_CLIENT_ID') ?: 'TU_GOOGLE_CLIENT_ID';
+        $this->clientId = '794332473703-40fudvsd5va31nsar1276m49qse1bfcb.apps.googleusercontent.com';
         $this->encryptionKey = getenv('ENCRYPTION_KEY') ?: 'TU_CLAVE_32_CHARS';
     }
 
     public function __invoke(): void
     {
-
-        // UF ver todooo despacito https://chatgpt.com/c/68306866-b8ec-8000-b5e5-d2fcd2dfa0b5
         session_start();
         header('Content-Type: application/json');
 
@@ -37,9 +35,9 @@ class SaveUserAction
 
         $user = $this->getOrCreateUser($payload);
 
-        $_SESSION['user_id'] = $user->id;
+        $_SESSION['userID'] = $user->id;
 
-        $this->setEncryptedCookie([
+        $this->setCookie([
             'userID' => $user->id,
             'userName' => $user->name
         ]);
@@ -62,41 +60,37 @@ class SaveUserAction
     {
         $email = $payload['email'];
         $user = UserModel::where('email', $email)->first();
-
         if (!$user) {
             $user = UserModel::create([
-                'name' => $payload['name'] ?? '',
+                'name' => $payload['given_name'] ?? null,
                 'email' => $email,
-                'given_name' => $payload['given_name'] ?? '',
-                'family_name' => $payload['family_name'] ?? '',
+                'surname' => $payload['family_name'] ?? null,
                 'avatar' => $payload['picture'] ?? null,
+                'source' => $payload['iss'] ?? null,
+                'created_at' => time(),
             ]);
         }
-
         return $user;
     }
 
-    private function setEncryptedCookie(array $data): void
+    private function setCookie(array $data): void
     {
-        $token = $this->encryptTokenData($data);
-
-        setcookie('peludorsToken', $token, [
-            'expires' => time() + 86400,
-            'path' => '/',
-            'secure' => true,
-            'httponly' => false,
-            'samesite' => 'Lax'
+        $cookieValue = json_encode([
+            'userID' => $data['userID'],
+            'userName' => $data['userName']
         ]);
-    }
 
-    private function encryptTokenData(array $data): string
-    {
-        $iv = random_bytes(16);
-        $cipher = "AES-256-CBC";
-        $plaintext = json_encode($data);
-        $encrypted = openssl_encrypt($plaintext, $cipher, $this->encryptionKey, 0, $iv);
-
-        return base64_encode($iv . $encrypted);
+        setcookie(
+            'peludors',
+            $cookieValue,
+            [
+                'expires' => time() + 86400,
+                'path' => '/',
+                'secure' => true,
+                'httponly' => false,
+                'samesite' => 'Lax'
+            ]
+        );
     }
 
     private function respondWithError(string $message): void

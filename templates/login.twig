@@ -100,7 +100,7 @@
                 id_token: id_token
             };
 
-            fetch('/auth/google-login-handler.php', {
+            fetch('login/google/callback', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData)
@@ -108,7 +108,9 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        window.location.href = '/dashboard';
+                        setTimeout(function() {
+                            window.location.href = "/";
+                        }, 300); // (0.3 seconds)
                     } else {
                         alert('Login fallido: ' + data.message);
                     }

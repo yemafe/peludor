@@ -79,9 +79,9 @@
             fetch('/logout.php', { method: 'POST' })
                 .finally(() => {
                     // Eliminar la cookie del navegador
-                    document.cookie = "peludorsToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-                    document.cookie = "peludorsToken=; path=/; secure; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-                    document.cookie = "peludorsToken=; path=/; samesite=lax; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                    document.cookie = "peludors=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                    document.cookie = "peludors=; path=/; secure; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                    document.cookie = "peludors=; path=/; samesite=lax; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 
                     // Cerrar sesión de Google (opcional pero recomendable)
                     const auth2 = gapi.auth2.getAuthInstance();
