@@ -8,12 +8,10 @@ use Peludors\Core\User\Infrastructure\Models\UserModel;
 class SaveUserAction
 {
     private string $clientId;
-    private string $encryptionKey;
 
     public function __construct()
     {
         $this->clientId = '794332473703-40fudvsd5va31nsar1276m49qse1bfcb.apps.googleusercontent.com';
-        $this->encryptionKey = getenv('ENCRYPTION_KEY') ?: 'TU_CLAVE_32_CHARS';
     }
 
     public function __invoke(): void
