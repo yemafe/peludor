@@ -7,7 +7,7 @@ use Exception;
 use Peludors\Core\User\Domain\User;
 use Peludors\Core\User\Domain\UserRepository;
 
-class GetUserByID
+readonly class GetUserByID
 {
     public function __construct(
         private UserRepository $userRepository
@@ -19,7 +19,7 @@ class GetUserByID
         try {
             return $this->userRepository->findByID($id);
         }catch (Exception $exception){
-            throw new UserNotFound('User not found for id '.$id);
+            throw new UserNotFound('User not found for id ' . $id);
         }
     }
 }

@@ -5,7 +5,8 @@
     "ext-json": "*",
     "mikecao/flight": "^3.15",
     "illuminate/database": "^12.12",
-    "php-di/php-di": "^7.0"
+    "php-di/php-di": "^7.0",
+    "google/apiclient": "^2.18"
   },
   "autoload": {
     "psr-4": {

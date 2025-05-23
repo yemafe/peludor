@@ -65,11 +65,37 @@
     </div>
 
     <script>
-        function signOut() {
+       /* function signOut() {
             document.cookie = "peludorsToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             setTimeout(function() {
                 window.location.href = "/";
             }, 300); // (0.3 seconds)
+        }*/
+    </script>
+
+    <script>
+        function signOut() {
+            // Cerrar sesión en el backend (PHP)
+            fetch('/logout.php', { method: 'POST' })
+                .finally(() => {
+                    // Eliminar la cookie del navegador
+                    document.cookie = "peludorsToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                    document.cookie = "peludorsToken=; path=/; secure; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                    document.cookie = "peludorsToken=; path=/; samesite=lax; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
+                    // Cerrar sesión de Google (opcional pero recomendable)
+                    const auth2 = gapi.auth2.getAuthInstance();
+                    if (auth2) {
+                        auth2.signOut().then(() => {
+                            console.log('Sesión de Google cerrada.');
+                            window.location.href = "/";
+                        });
+                    } else {
+                        window.location.href = "/";
+                    }
+                });
         }
     </script>
+
+
 {% endblock %}

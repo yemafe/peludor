@@ -74,18 +74,48 @@
     <script src="../public/js/main.js"></script>
 
     <script>
-        function onSignIn(googleUser) {
+        /*function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
             //crear una solo cuando se le de al botón, probar mas
+            console.log(profile);
             const sessionData = {
-                userID: 123,
+                userID: profile.userID,
                 userName: profile.getName(),
                 userEmail: profile.getEmail()
             };
             document.cookie = `peludorsToken=${encodeURIComponent(JSON.stringify(sessionData))}; path=/; max-age=${60 * 60 * 24}; secure; SameSite=Lax`;
             setTimeout(function() {
-                window.location.href = "/";
+                //window.location.href = "/";
             }, 300); // (0.3 seconds)
+        }*/
+    </script>
+
+
+    <script>
+        function onSignIn(googleUser) {
+            const profile = googleUser.getBasicProfile();
+            const id_token = googleUser.getAuthResponse().id_token;
+
+            const userData = {
+                id_token: id_token
+            };
+
+            fetch('/auth/google-login-handler.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = '/dashboard';
+                    } else {
+                        alert('Login fallido: ' + data.message);
+                    }
+                })
+                .catch(err => console.error('Error:', err));
         }
     </script>
+
+
 {% endblock %}

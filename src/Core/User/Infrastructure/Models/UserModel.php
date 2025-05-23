@@ -12,5 +12,12 @@ class UserModel extends Model
 {
     protected $table = 'user';
     protected $primaryKey = 'id';
+    public $timestamps = true;
+
+    protected $fillable = [
+        'name',
+        'nickName',
+        'avatar',
+    ];
 }
 

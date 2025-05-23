@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain;
+namespace Peludors\Core\User\Domain;
 
 use Exception;
 

@@ -1,22 +1,18 @@
 <?php
 $container = require __DIR__ . '/../src/Core/Config/Classes.php';
-use Peludors\Core\User\Application\GetUserByID\GetUserByID;
-use Peludors\Core\User\Infrastructure\Controllers\RenderUserAction;
-use Peludors\Core\User\Infrastructure\Repository\UserMySQLRepository;
+
 use Peludors\Core\User\Infrastructure\Services\CheckUserIsLoggedIn;
+use Peludors\Core\User\Infrastructure\Services\GetUserSessionData;
+use Peludors\Web\Home\Infrastructure\Controllers\RenderHomeAction;
 
 Flight::set('di', $container);
 Flight::before('start', function (&$params, &$output) use ($container) {
-    $check = new CheckUserIsLoggedIn();
-    $check();
+    (new CheckUserIsLoggedIn())();
 });
 
-Flight::route('GET /', function () use ($container){
-   /* $getUserByID = $container->get(GetUserByID::class);
-    $user = $getUserByID(1);*/
-    $controller = $container->get(RenderUserAction::class);
-    $controller(1);
-   // echo Flight::view()->render('index.twig', ['user' => $user]);
+Flight::route('/', function () use ($container){
+    $userCookieData = (new GetUserSessionData())();
+    $container->get(RenderHomeAction::class)($userCookieData);
 });
 
 
