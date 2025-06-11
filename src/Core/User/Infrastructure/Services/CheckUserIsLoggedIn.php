@@ -1,7 +1,6 @@
 <?php
 
 namespace Peludors\Core\User\Infrastructure\Services;
-
 use Flight;
 
 class CheckUserIsLoggedIn
@@ -13,7 +12,7 @@ class CheckUserIsLoggedIn
             $raw = urldecode($_COOKIE['peludors']);
             $data = json_decode($raw, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($data)) {
-                if (!empty($data['userID']) && isset($data['userName']) && isset($data['userEmail'])) {
+                if (!empty($data['userID']) && isset($data['userName'])) {
                     $view->addGlobal('userSessionData', $data);
                     return;
                 }
