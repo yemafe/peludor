@@ -1,101 +1,162 @@
-
 {% extends "base.twig" %}
 
-{% block title %}Panel de usuario{% endblock %}
+{% block title %}Obituario de mascotas{% endblock %}
 {% block head %}
     {{ parent() }}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 {% endblock %}
+
 {% block content %}
+    <div class="container mt-5">
+        <h3 class="mb-4">Añadir mascota al obituario</h3>
 
-    <div class="container">
-        <div class="wow fadeInUp" data-wow-delay="0.1s">
-            <h3 class="mb-4">Mis datos</h3>
-            {% if user %}
-                {{ user.name }}
-            {% endif %}
-            <div class="row">
-                <div class="col-sm-4">
+        <div class="card p-4 border rounded shadow-sm bg-white">
+            <form id="obituary-form" method="POST" enctype="multipart/form-data" action="/mascota/guardar">
+                <div class="row g-3">
 
-                </div>
-                <div class="col-sm-6">
-                    <form>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Tu nombre">
-                                    <label for="name">Nombre</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="email" class="form-control" id="google" placeholder="Cuenta de google">
-                                    <label for="google">Google</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="facebook" placeholder="Facebook">
-                                    <label for="facebook">Facebook</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="instagram" placeholder="Instagram">
-                                    <label for="instagram">Facebook</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-secondary rounded-pill py-3 px-5" type="submit">Guardar</button>
-                            </div>
+                    <!-- Nombre -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Nombre" required>
+                            <label for="name">Nombre del animal *</label>
                         </div>
-                    </form>
+                    </div>
+
+                    <!-- Tipo de animal -->
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            <select name="type" id="type" class="form-select" required>
+                                <option disabled selected>Selecciona tipo</option>
+                                <option value="perro">Perro</option>
+                                <option value="gato">Gato</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                            <label for="type">Tipo de mascota *</label>
+                        </div>
+                    </div>
+
+                    <!-- Tipo personalizado (si es "Otro") -->
+                    <div class="col-md-6 d-none" id="custom-type-container">
+                        <div class="form-floating">
+                            <input type="text" name="custom_type" id="custom-type" class="form-control" placeholder="Tipo de mascota">
+                            <label for="custom-type">Especifica el tipo</label>
+                        </div>
+                    </div>
+
+                    <!-- Raza -->
+                    <div class="col-md-4" id="breed-container">
+                        <div class="form-floating">
+                            <select name="breed" id="breed" class="form-select" required>
+                                <option disabled selected>Selecciona raza</option>
+                            </select>
+                            <label for="breed">Raza *</label>
+                        </div>
+                        <div class="form-check mt-2">
+                            <input type="checkbox" class="form-check-input" id="mixedBreed">
+                            <label class="form-check-label" for="mixedBreed">
+                                ¿Es cruce? <span class="text-muted small">(Ej: cruce de pastor alemán)</span>
+                            </label>
+                        </div>
+                        <div class="form-floating mt-2 d-none" id="custom-breed-container">
+                            <input type="text" name="custom_breed" id="custom-breed" class="form-control" placeholder="Introduce la raza">
+                            <label for="custom-breed">Introduce la raza</label>
+                        </div>
+                    </div>
+
+                    <!-- Fecha nacimiento -->
+                    <div class="col-md-2">
+                        <div class="form-floating">
+                            <input type="date" name="birth_date" id="birth_date" class="form-control" required>
+                            <label for="birth_date">Nacimiento *</label>
+                        </div>
+                    </div>
+
+                    <!-- Fecha fallecimiento -->
+                    <div class="col-md-2">
+                        <div class="form-floating">
+                            <input type="date" name="death_date" id="death_date" class="form-control" required>
+                            <label for="death_date">Fallecimiento *</label>
+                        </div>
+                    </div>
+
+                    <!-- País -->
+                    <div class="col-md-2">
+                        <div class="form-floating">
+                            <select name="country" id="country" class="form-select">
+                                <option disabled selected>Selecciona país</option>
+                            </select>
+                            <label for="country">País</label>
+                        </div>
+                    </div>
+
+                    <!-- Ciudad -->
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            <select name="city" id="city" class="form-select">
+                                <option disabled selected>Selecciona ciudad</option>
+                            </select>
+                            <label for="city">Ciudad </label>
+                        </div>
+                    </div>
+
+                    <!-- Biografía -->
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea name="biography" id="biography" class="form-control" style="height: 100px"></textarea>
+                            <label for="biography">Biografía</label>
+                        </div>
+                    </div>
+
+                    <!-- Despedida -->
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea name="farewell" id="farewell" class="form-control" style="height: 100px"></textarea>
+                            <label for="farewell">Mensaje de despedida</label>
+                        </div>
+                    </div>
+
+                    <!-- Foto -->
+                    <div class="col-6">
+                        <label for="photo" class="form-label">Foto del animal</label>
+                        <input type="file" name="photo" id="photo" class="form-control" accept="image/jpeg,image/png,image/webp">
+                        <small class="text-muted">Formatos permitidos: JPG, PNG, WEBP. Solo imágenes del animal, contenido inapropiado será eliminado.</small>
+                    </div>
+
+                    <!-- Botón -->
+                    <div class="col-12 mt-3">
+                        <button type="submit" class="btn btn-success rounded-pill px-5 py-2">Guardar obituario</button>
+                    </div>
+
                 </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-primary rounded-pill py-2 px-4" href="/" onclick="signOut();"> Signout
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg font-size-24 ms-2" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
-                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
+{% endblock %}
 
+{% block scripts %}
+    {{ parent() }}
     <script>
-       /* function signOut() {
-            document.cookie = "peludorsToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            setTimeout(function() {
-                window.location.href = "/";
-            }, 300); // (0.3 seconds)
-        }*/
+        document.getElementById('toggle-form-btn').addEventListener('click', function () {
+            const formContainer = document.getElementById('mascota-form-container');
+            formContainer.classList.toggle('d-none');
+        });
+
+        document.getElementById('photo').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Solo se permiten imágenes JPG, PNG o WEBP.');
+                event.target.value = '';
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                alert('La imagen no debe superar los 5MB.');
+                event.target.value = '';
+            }
+        });
     </script>
-
-    <script>
-        function signOut() {
-            // Cerrar sesión en el backend (PHP)
-            fetch('/logout.php', { method: 'POST' })
-                .finally(() => {
-                    // Eliminar la cookie del navegador
-                    document.cookie = "peludors=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-                    document.cookie = "peludors=; path=/; secure; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-                    document.cookie = "peludors=; path=/; samesite=lax; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-
-                    // Cerrar sesión de Google (opcional pero recomendable)
-                    const auth2 = gapi.auth2.getAuthInstance();
-                    if (auth2) {
-                        auth2.signOut().then(() => {
-                            console.log('Sesión de Google cerrada.');
-                            window.location.href = "/";
-                        });
-                    } else {
-                        window.location.href = "/";
-                    }
-                });
-        }
-    </script>
-
-
+    <script src="/js/obituary-data.js"></script>
 {% endblock %}
