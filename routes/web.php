@@ -32,3 +32,7 @@ Flight::route('/obituary', function () use ($container){
 Flight::route('POST /login/google/callback', function () {
     (new SaveUserAction())();
 });
+
+Flight::route('POST /pet/add' , function(){
+    (new AddPetAction());
+});
