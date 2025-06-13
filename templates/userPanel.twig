@@ -16,7 +16,6 @@
             <form id="obituary-form" method="POST" enctype="multipart/form-data" action="/mascota/guardar">
                 <div class="row g-3">
 
-                    <!-- Nombre -->
                     <div class="col-md-6">
                         <div class="form-floating">
                             <input type="text" name="name" id="name" class="form-control" placeholder="Nombre" required>
@@ -24,10 +23,9 @@
                         </div>
                     </div>
 
-                    <!-- Tipo de animal -->
                     <div class="col-md-3">
                         <div class="form-floating">
-                            <select name="type" id="type" class="form-select" required>
+                            <select name="petType" id="petType" class="form-select" required>
                                 <option disabled selected>Selecciona tipo</option>
                                 <option value="perro">Perro</option>
                                 <option value="gato">Gato</option>
@@ -37,7 +35,6 @@
                         </div>
                     </div>
 
-                    <!-- Tipo personalizado (si es "Otro") -->
                     <div class="col-md-6 d-none" id="custom-type-container">
                         <div class="form-floating">
                             <input type="text" name="custom_type" id="custom-type" class="form-control" placeholder="Tipo de mascota">
@@ -45,7 +42,6 @@
                         </div>
                     </div>
 
-                    <!-- Raza -->
                     <div class="col-md-4" id="breed-container">
                         <div class="form-floating">
                             <select name="breed" id="breed" class="form-select" required>
@@ -65,7 +61,6 @@
                         </div>
                     </div>
 
-                    <!-- Fecha nacimiento -->
                     <div class="col-md-2">
                         <div class="form-floating">
                             <input type="date" name="birth_date" id="birth_date" class="form-control" required>
@@ -73,7 +68,6 @@
                         </div>
                     </div>
 
-                    <!-- Fecha fallecimiento -->
                     <div class="col-md-2">
                         <div class="form-floating">
                             <input type="date" name="death_date" id="death_date" class="form-control" required>
@@ -81,27 +75,6 @@
                         </div>
                     </div>
 
-                    <!-- País -->
-                    <div class="col-md-2">
-                        <div class="form-floating">
-                            <select name="country" id="country" class="form-select">
-                                <option disabled selected>Selecciona país</option>
-                            </select>
-                            <label for="country">País</label>
-                        </div>
-                    </div>
-
-                    <!-- Ciudad -->
-                    <div class="col-md-3">
-                        <div class="form-floating">
-                            <select name="city" id="city" class="form-select">
-                                <option disabled selected>Selecciona ciudad</option>
-                            </select>
-                            <label for="city">Ciudad </label>
-                        </div>
-                    </div>
-
-                    <!-- Biografía -->
                     <div class="col-12">
                         <div class="form-floating">
                             <textarea name="biography" id="biography" class="form-control" style="height: 100px"></textarea>
@@ -109,7 +82,6 @@
                         </div>
                     </div>
 
-                    <!-- Despedida -->
                     <div class="col-12">
                         <div class="form-floating">
                             <textarea name="farewell" id="farewell" class="form-control" style="height: 100px"></textarea>
@@ -117,14 +89,12 @@
                         </div>
                     </div>
 
-                    <!-- Foto -->
                     <div class="col-6">
                         <label for="photo" class="form-label">Foto del animal</label>
                         <input type="file" name="photo" id="photo" class="form-control" accept="image/jpeg,image/png,image/webp">
                         <small class="text-muted">Formatos permitidos: JPG, PNG, WEBP. Solo imágenes del animal, contenido inapropiado será eliminado.</small>
                     </div>
 
-                    <!-- Botón -->
                     <div class="col-12 mt-3">
                         <button type="submit" class="btn btn-success rounded-pill px-5 py-2">Guardar obituario</button>
                     </div>
