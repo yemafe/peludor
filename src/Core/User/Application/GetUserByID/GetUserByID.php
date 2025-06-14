@@ -3,9 +3,9 @@
 namespace Peludors\Core\User\Application\GetUserByID;
 
 use Exception;
-use Peludors\Core\User\Domain\User;
-use Peludors\Core\User\Domain\UserNotFound;
-use Peludors\Core\User\Domain\UserRepository;
+use Peludors\Core\User\Domain\User\User;
+use Peludors\Core\User\Domain\User\UserNotFound;
+use Peludors\Core\User\Domain\User\UserRepository;
 
 readonly class GetUserByID
 {

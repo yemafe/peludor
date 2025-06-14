@@ -1,6 +1,6 @@
 <?php
 
-namespace Peludors\Core\User\Domain;
+namespace Peludors\Core\User\Domain\User;
 
 interface UserRepository
 {

@@ -2,8 +2,6 @@
 
 namespace Peludors\Core\User\Infrastructure\Services;
 
-use Peludors\Core\User\Domain\UserNotFound;
-
 class GetUserSessionData
 {
     public function __invoke(): ?array

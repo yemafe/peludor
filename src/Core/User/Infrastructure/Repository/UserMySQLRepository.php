@@ -1,8 +1,8 @@
 <?php
 
 namespace Peludors\Core\User\Infrastructure\Repository;
-use Peludors\Core\User\Domain\User;
-use Peludors\Core\User\Domain\UserRepository;
+use Peludors\Core\User\Domain\User\User;
+use Peludors\Core\User\Domain\User\UserRepository;
 use Peludors\Core\User\Infrastructure\Models\UserModel;
 
 class UserMySQLRepository implements UserRepository
