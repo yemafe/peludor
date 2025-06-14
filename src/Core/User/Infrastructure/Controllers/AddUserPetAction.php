@@ -17,14 +17,14 @@ readonly class AddUserPetAction
     {
         $name = trim($_POST['name']);
         $type = $_POST['petType'];
-        $customType = trim($_POST['customType'] ?? '');
+        $customType = trim($_POST['customType']);
         $breed = $_POST['breed'];
-        $customBreed = trim($_POST['customBreed'] ?? '');
-        $birthDate = strtotime($_POST['birth_date']) ?? 0;
-        $deathDate = strtotime($_POST['death_date']) ?? 0;
-        $mixedBreed = $_POST['mixed_breed'];
-        $biography = trim($_POST['biography'] ?? '');
-        $farewell = trim($_POST['farewell'] ?? '');
+        $customBreed = trim($_POST['customBreed'] );
+        $birthDate = strtotime($_POST['birthDate']);
+        $deathDate = strtotime($_POST['deathDate']);
+        //$mixedBreed = $_POST['mixedBreed'];
+        $biography = trim($_POST['biography'] ?? null);
+        $farewell = trim($_POST['farewell'] ?? null);
         $finalType = ($type === 'otro') ? $customType : $type;
         $finalBreed = ($breed === 'Otro') ? $customBreed : $breed;
 
@@ -55,7 +55,7 @@ readonly class AddUserPetAction
             'breed' => $finalBreed,
             'birthDate' => $birthDate,
             'deathDate' => $deathDate,
-            'mixedBreed' => $mixedBreed,
+            //'mixedBreed' => $mixedBreed,
             'biography' => $biography,
             'farewell' => $farewell,
             'photoPath' => $photoPath

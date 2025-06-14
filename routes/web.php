@@ -1,6 +1,10 @@
 <?php
 $container = require __DIR__ . '/../src/Core/Config/Classes.php';
 
+use Peludors\Core\User\Application\AddUserPet\AddUserPet;
+use Peludors\Core\User\Domain\Pet\PetRepository;
+use Peludors\Core\User\Infrastructure\Controllers\AddUserPetAction;
+use Peludors\Core\User\Infrastructure\Repository\PetMySQLRepository;
 use Peludors\Core\User\Infrastructure\Services\CheckUserIsLoggedIn;
 use Peludors\Core\User\Infrastructure\Services\GetUserSessionData;
 use Peludors\Web\Home\Infrastructure\Controllers\RenderHomeAction;
@@ -34,5 +38,5 @@ Flight::route('POST /login/google/callback', function () {
 });
 
 Flight::route('POST /pet/add' , function(){
-    (new AddPetAction());
+    (new AddUserPetAction(new AddUserPet(new PetMySQLRepository())))();
 });

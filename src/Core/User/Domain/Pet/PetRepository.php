@@ -7,7 +7,7 @@ use Peludors\Core\Pet\Domain\PetCollection;
 
 interface PetRepository
 {
-    public function add(array $data): Pet;
+    public function add(Pet $pet): void;
 
     public function getByID(int $id): Pet;
 

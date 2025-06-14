@@ -9,9 +9,9 @@ use Peludors\Core\User\Domain\Pet\PetRepository;
 
 class PetMySQLRepository implements PetRepository
 {
-    public function add(array $data): Pet
+    public function add(Pet $pet): void
     {
-        return Pet::create($data);
+        Pet::create($pet->toArray());
     }
 
     public function getByID(int $id): Pet

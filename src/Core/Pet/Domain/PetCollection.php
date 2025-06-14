@@ -30,11 +30,11 @@ class PetCollection implements IteratorAggregate
                 type: $row->type,
                 breed: $row->breed,
                 birthDate: $row->birthDate,
-                deadDate: $row->deadDate,
-                mixedBreed: $row->mixedBreed,
-                biography: $row->biography ?? '',
-                farewell: $row->farewell ?? '',
-                photo: $row->photo ?? '',
+                deathDate: $row->deathDate,
+               // mixedBreed: $row->mixedBreed,
+                biography: $row->biography ?? null,
+                farewell: $row->farewell ?? null,
+                photo: $row->photo ?? null
             );
         }
 
