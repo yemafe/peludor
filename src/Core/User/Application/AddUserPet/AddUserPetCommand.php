@@ -14,7 +14,7 @@ use AllowDynamicProperties;
         $this->breed = $data['breed'];
         $this->birthDate = (int) $data['birthDate'];
         $this->deathDate = (int) $data['deathDate'];
-        $this->mixedBreed = (int) $data['mixedBreed'];
+        //$this->mixedBreed = (int) $data['mixedBreed'];
         $this->biography = $data['biography'];
         $this->farewell = $data['farewell'];
         $this->photoPath = $data['photoPath'];

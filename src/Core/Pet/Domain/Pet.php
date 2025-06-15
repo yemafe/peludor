@@ -36,20 +36,21 @@ class Pet
         ];
     }
 
-    public function fromArray(array $data) : self
+    static public function fromArray(array $data) : self
     {
-        $pet = new self();
-        $pet->userID = $data['userID'];
-        $pet->name = $data['name'];
-        $pet->type = $data['type'];
-        $pet->breed = $data['breed'];
-        $pet->birthDate = $data['birthDate'];
-        $pet->deathDate = $data['deathDate'];
-        //$pet->mixedBreed = $data['isMixedBreed'];
-        $pet->biography = $data['biography'] ?? null;
-        $pet->farewell = $data['farewell'] ?? null;
-        $pet->photo = $data['photoPath'] ?? null;
-        return $pet;
+        return new self (
+            $data['id'],
+            $data['userID'],
+            $data['name'],
+            $data['type'],
+            $data['breed'],
+            $data['birthDate'],
+            $data['deathDate'],
+            //$data['isMixedBreed'];
+            $data['biography'] ?? null,
+            $data['farewell'] ?? null,
+            $data['photoPath'] ?? null
+        );
     }
 
     public function userID(): int
