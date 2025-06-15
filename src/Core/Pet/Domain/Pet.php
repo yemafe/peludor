@@ -5,14 +5,13 @@ namespace Peludors\Core\Pet\Domain;
 class Pet
 {
     public function __construct(
-        protected int $id,
         protected int $userID,
         protected string $name,
         protected string $type,
-        protected string $breed,
+        protected ?string $breed,
         protected int $birthDate,
         protected int $deathDate,
-        //protected bool $mixedBreed,
+        protected bool $mixedBreed,
         protected ?string $biography,
         protected ?string $farewell,
         protected ?string $photo
@@ -22,14 +21,13 @@ class Pet
     public function toArray(): array
     {
         return [
-            'id' => $this->id,
             'userID' => $this->userID,
             'name' => $this->name,
             'type' => $this->type,
-            'breed' => $this->breed,
+            'breed' => $this->breed ?? null,
             'birthDate' => $this->birthDate,
             'deathDate' => $this->deathDate,
-            //'mixedBreed' => $this->mixedBreed,
+            'mixedBreed' => $this->mixedBreed,
             'biography' => $this->biography ?? null,
             'farewell' => $this->farewell ?? null,
             'photo' => $this->photo ?? null
@@ -39,14 +37,13 @@ class Pet
     static public function fromArray(array $data) : self
     {
         return new self (
-            $data['id'],
             $data['userID'],
             $data['name'],
             $data['type'],
-            $data['breed'],
+            $data['breed'] ?? null,
             $data['birthDate'],
             $data['deathDate'],
-            //$data['isMixedBreed'];
+            $data['mixedBreed'] ,
             $data['biography'] ?? null,
             $data['farewell'] ?? null,
             $data['photoPath'] ?? null
@@ -56,10 +53,5 @@ class Pet
     public function userID(): int
     {
         return $this->userID;
-    }
-
-    public function id(): int
-    {
-        return $this->id;
     }
 }

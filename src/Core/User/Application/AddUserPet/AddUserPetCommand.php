@@ -14,7 +14,7 @@ use AllowDynamicProperties;
         $this->breed = $data['breed'];
         $this->birthDate = (int) $data['birthDate'];
         $this->deathDate = (int) $data['deathDate'];
-        //$this->mixedBreed = (int) $data['mixedBreed'];
+        $this->mixedBreed = (int) $data['mixedBreed'];
         $this->biography = $data['biography'];
         $this->farewell = $data['farewell'];
         $this->photoPath = $data['photoPath'];
@@ -35,7 +35,7 @@ use AllowDynamicProperties;
         return $this->type;
     }
 
-    public function breed(): string
+    public function breed(): ?string
     {
         return $this->breed;
     }
@@ -50,10 +50,10 @@ use AllowDynamicProperties;
         return $this->deathDate;
     }
 
-    /*public function mixedBreed(): bool
+    public function mixedBreed(): bool
     {
         return $this->mixedBreed;
-    }*/
+    }
 
     public function biography(): ?string
     {

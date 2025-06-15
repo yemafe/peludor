@@ -8,11 +8,34 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-5">
-        <h3 class="mb-4">Añadir mascota al obituario</h3>
-        <! -- https://chatgpt.com/c/6849e89e-c1a8-8000-9ea3-94763d969a23 -->
 
-        <div class="card p-4 border rounded shadow-sm bg-white">
+    {% if message %}
+        {{ message }}
+    {% endif %}
+
+    <div class="container mt-5">
+        <div class="mb-4">
+            <h5>Tus mascotas</h5>
+            <div id="pet-list" class="border p-3 rounded bg-light">
+                {% if pets is not empty %}
+                    <ul class="list-group">
+                        {% for pet in pets %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>{{ pet.name }} ({{ pet.type }})</span>
+                                <span class="text-muted small">Fallecido: {{ pet.date_of_death }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">No has añadido ninguna mascota todavía.</p>
+                {% endif %}
+            </div>
+        </div>
+        <button id="add-pet-form-btn" class="btn btn-secondary rounded-pill py-2 px-4 mb-3">+ Añadir mascota</button>
+
+        <div class="card p-4 border rounded shadow-sm bg-white d-none" id="pet-form-container">
+            <h3 class="mb-4">Añadir mascota al obituario</h3>
+
             <form id="obituary-form" method="POST" enctype="multipart/form-data" action="/pet/add">
                 <div class="row g-3">
 
@@ -108,8 +131,8 @@
 {% block scripts %}
     {{ parent() }}
     <script>
-        document.getElementById('toggle-form-btn').addEventListener('click', function () {
-            const formContainer = document.getElementById('mascota-form-container');
+        document.getElementById('add-pet-form-btn').addEventListener('click', function () {
+            const formContainer = document.getElementById('pet-form-container');
             formContainer.classList.toggle('d-none');
         });
 

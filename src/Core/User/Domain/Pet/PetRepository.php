@@ -9,13 +9,7 @@ interface PetRepository
 {
     public function add(Pet $pet): void;
 
-    public function getByID(int $id): Pet;
-
     public function updateByEntity(Pet $pet): void;
-
-    public function getAllOrderedByDeadDate(): PetCollection;
-
-    public function getByUserID(int $userID): PetCollection;
 
     public function getByUserIDAndName(int $userID, string $name): Pet;
 

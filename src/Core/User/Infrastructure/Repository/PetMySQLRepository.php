@@ -12,20 +12,15 @@ class PetMySQLRepository implements PetRepository
 {
     public function add(Pet $pet): void
     {
-        Pet::create($pet->toArray());
-    }
-
-    public function getByID(int $id): Pet
-    {
-        return Pet::find($id);
+        PetModel::create($pet->toArray());
     }
 
     public function updateByEntity(Pet $pet): void
     {
-        $pet->update($pet->toArray());
+        PetModel::update($pet->toArray());
     }
 
-    public function getAllOrderedByDeadDate(): PetCollection
+    /*public function getAllOrderedByDeadDate(): PetCollection
     {
         $rows = DB::table('pet')->orderBy('deadDate', 'desc')->get();
         return PetCollection::fromRows($rows);    }
@@ -34,8 +29,7 @@ class PetMySQLRepository implements PetRepository
     {
         $rows = DB::table('pet')->where('userID', $userID)->get();
         return PetCollection::fromRows($rows);
-    }
-
+    }*/
 
     public function getByUserIDAndName(int $userID, string $name): Pet
     {

@@ -2,6 +2,7 @@
 
 namespace Peludors\Core\User\Infrastructure\Controllers;
 
+use Flight;
 use Peludors\Core\User\Application\AddUserPet\AddUserPet;
 use Peludors\Core\User\Application\AddUserPet\AddUserPetCommand;
 
@@ -18,11 +19,11 @@ readonly class AddUserPetAction
         $name = trim($_POST['name']);
         $type = $_POST['petType'];
         $customType = trim($_POST['customType']);
-        $breed = $_POST['breed'];
+        $breed = $_POST['breed'] ?? null;
         $customBreed = trim($_POST['customBreed'] );
         $birthDate = strtotime($_POST['birthDate']);
         $deathDate = strtotime($_POST['deathDate']);
-        //$mixedBreed = $_POST['mixedBreed'];
+        $mixedBreed = $_POST['mixedBreed'] ?? 0;
         $biography = trim($_POST['biography'] ?? null);
         $farewell = trim($_POST['farewell'] ?? null);
         $finalType = ($type === 'otro') ? $customType : $type;
@@ -55,14 +56,15 @@ readonly class AddUserPetAction
             'breed' => $finalBreed,
             'birthDate' => $birthDate,
             'deathDate' => $deathDate,
-            //'mixedBreed' => $mixedBreed,
+            'mixedBreed' => $mixedBreed,
             'biography' => $biography,
             'farewell' => $farewell,
             'photoPath' => $photoPath
         ];
 
         $command = new AddUserPetCommand($petData);
-        $this->addUserPet->__invoke($command);
+        $message = $this->addUserPet->__invoke($command);
+        echo Flight::view()->render('userPanel.twig',['message' => $message]);
     }
 
 }

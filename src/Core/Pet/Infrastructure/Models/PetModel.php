@@ -15,7 +15,7 @@ class PetModel extends Model
         'breed',
         'birthDate',
         'deathDate',
-        //'mixedBreed',
+        'mixedBreed',
         'biography',
         'farewell',
         'photo'

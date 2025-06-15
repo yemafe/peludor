@@ -2,10 +2,8 @@
 
 namespace Peludors\Core\User\Application\AddUserPet;
 
-use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Peludors\Core\Pet\Domain\Pet;
-use Peludors\Core\Pet\Infrastructure\Models\PetModel;
 use Peludors\Core\User\Domain\Pet\PetRepository;
 
 class AddUserPet
@@ -15,26 +13,27 @@ class AddUserPet
     ) {
     }
 
-    public function __invoke(AddUserPetCommand $command)
+    public function __invoke(AddUserPetCommand $command): string
     {
         $petName = $command->name();
         try {
             $this->petRepository->getByUserIDAndName($command->userID(), $petName);
-            throw new UserPetAlreadyExists('Ya existe una mascota con el nombre ' . $petName . ' para este usuario.');
+            return 'Ya tienes una mascota con el nombre ' . $petName;
         }catch (ModelNotFoundException $exception) {
             $pet = Pet::fromArray([
                 'userID' => $command->userID(),
                 'name' => $petName,
                 'type' => $command->type(),
                 'breed' => $command->breed(),
-                'birthDay' => $command->birthDate(),
-                'deathDay' => $command->deathDate(),
-                //'mixedBreed' => $command->mixedBreed(),
+                'birthDate' => $command->birthDate(),
+                'deathDate' => $command->deathDate(),
+                'mixedBreed' => $command->mixedBreed(),
                 'biography' => $command->biography(),
                 'farewell' => $command->farewell(),
                 'photo' => $command->photopath()
             ]);
             $this->petRepository->add($pet);
+            return "Pet created sucessfully.";
         }
     }
 }
