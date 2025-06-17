@@ -12,7 +12,9 @@ readonly class AddUserPetAction
     public function __construct(
         protected AddUserPet $addUserPet,
         protected GetUserSessionData $getUserSessionData
-    ){
+    )
+
+    {
     }
 
     public function __invoke():void
