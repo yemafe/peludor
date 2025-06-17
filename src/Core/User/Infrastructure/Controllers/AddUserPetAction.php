@@ -40,7 +40,8 @@ readonly class AddUserPetAction
             if (in_array($fileType, $allowedTypes) && $fileSize <= 5 * 1024 * 1024) {
                 $ext = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
                 $filename = uniqid('pet_') . "." . $ext;
-                $uploadDir = __DIR__ . '/../uploads/photo/pets/';
+                $uploadDir = __ROOT_DIR__ . '/public/uploads/users/photo/pets/'; //accesible desde http://localhost/uploads/users/photo/pets/<archivo>
+
                 if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
                 $uploadFile = $uploadDir . $filename;
 

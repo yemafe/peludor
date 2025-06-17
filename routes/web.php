@@ -38,5 +38,8 @@ Flight::route('POST /login/google/callback', function () {
 });
 
 Flight::route('POST /pet/add' , function(){
-    (new AddUserPetAction(new AddUserPet(new PetMySQLRepository())))();
+    (new AddUserPetAction(
+        new AddUserPet(new PetMySQLRepository()),
+        new GetUserSessionData()
+    ))();
 });

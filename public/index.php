@@ -1,4 +1,5 @@
 <?php
+define('__ROOT_DIR__', dirname(__DIR__));
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/Core/Config/DatabaseConnection.php';
 use Peludors\Core\User\Infrastructure\Services\CheckUserIsLoggedIn;

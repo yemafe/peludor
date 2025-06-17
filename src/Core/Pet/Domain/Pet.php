@@ -46,7 +46,7 @@ class Pet
             $data['mixedBreed'] ,
             $data['biography'] ?? null,
             $data['farewell'] ?? null,
-            $data['photoPath'] ?? null
+            $data['photo'] ?? null
         );
     }
 
