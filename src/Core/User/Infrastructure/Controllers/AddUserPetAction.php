@@ -5,13 +5,14 @@ namespace Peludors\Core\User\Infrastructure\Controllers;
 use Flight;
 use Peludors\Core\User\Application\AddUserPet\AddUserPet;
 use Peludors\Core\User\Application\AddUserPet\AddUserPetCommand;
+use Peludors\Core\User\Infrastructure\Services\GetUserSessionData;
 
 readonly class AddUserPetAction
 {
     public function __construct(
-        protected AddUserPet $addUserPet
-    )
-    {
+        protected AddUserPet $addUserPet,
+        protected GetUserSessionData $getUserSessionData
+    ){
     }
 
     public function __invoke():void
@@ -50,7 +51,7 @@ readonly class AddUserPetAction
         }
 
         $petData = [
-            'userID'=> 1,//obtenerlo de la cookie
+            'userID'=> $this->getUserSessionData->__invoke()['userID'],
             'name' => $name,
             'type' => $finalType,
             'breed' => $finalBreed,
@@ -66,5 +67,6 @@ readonly class AddUserPetAction
         $message = $this->addUserPet->__invoke($command);
         echo Flight::view()->render('userPanel.twig',['message' => $message]);
     }
+
 
 }
