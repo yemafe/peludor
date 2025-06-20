@@ -2,10 +2,9 @@
 define('__ROOT_DIR__', dirname(__DIR__));
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/Core/Config/DatabaseConnection.php';
-use Peludors\Core\User\Infrastructure\Services\CheckUserIsLoggedIn;
+
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
-use Illuminate\Support\Facades\DB;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);

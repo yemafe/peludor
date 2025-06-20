@@ -2,8 +2,6 @@
 namespace Peludors\Web\Home\Infrastructure\Controllers;
 
 use Flight;
-use Peludors\Core\User\Application\GetUserByID\GetUserByID;
-use Twig\Environment;
 
 class RenderHomeAction
 {

@@ -1,8 +1,8 @@
 <?php
 
 use DI\ContainerBuilder;
-use Peludors\Core\User\Domain\User\UserRepository;
-use Peludors\Core\User\Infrastructure\Repository\UserMySQLRepository;
+use Peludors\UserAdmin\User\Domain\User\UserRepository;
+use Peludors\UserAdmin\User\Infrastructure\Repository\UserMySQLRepository;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\Loader\LoaderInterface;
