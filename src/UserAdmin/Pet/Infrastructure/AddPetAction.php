@@ -67,7 +67,11 @@ readonly class AddPetAction
 
         $command = new AddPetCommand($petData);
         $message = $this->addUserPet->__invoke($command);
-        echo Flight::view()->render('userPanel.twig',['message' => $message]);
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['flash_message'] = $message;
+        Flight::redirect('/userPanel');
     }
 
 

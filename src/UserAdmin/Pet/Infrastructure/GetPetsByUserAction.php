@@ -21,6 +21,15 @@ class GetPetsByUserAction
 
         $command = new GetPetsByUserQuery($userID);
         $pets = $this->getPetsByUser->__invoke($command);
-        echo Flight::view()->render('UserPanel.twig', ['pets'=> $pets->toArray()]);
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $message = $_SESSION['flash_message'] ?? null;
+        unset($_SESSION['flash_message']);
+        echo Flight::view()->render(
+            'UserPanel.twig', [
+                    'pets'=> $pets->toArray(),
+                    'message' => $message
+            ]);
     }
 }
