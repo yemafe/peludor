@@ -1,16 +1,16 @@
 <?php
 
-namespace Peludors\UserAdmin\User\Infrastructure\Controllers;
+namespace Peludors\UserAdmin\Pet\Infrastructure;
 
 use Flight;
-use Peludors\UserAdmin\User\Application\AddUserPet\AddUserPet;
-use Peludors\UserAdmin\User\Application\AddUserPet\AddUserPetCommand;
+use Peludors\UserAdmin\Pet\Application\AddUserPet\AddPet;
+use Peludors\UserAdmin\Pet\Application\AddUserPet\AddPetCommand;
 use Peludors\UserAdmin\User\Infrastructure\Services\GetUserSessionData;
 
-readonly class AddUserPetAction
+readonly class AddPetAction
 {
     public function __construct(
-        protected AddUserPet $addUserPet,
+        protected AddPet $addUserPet,
         protected GetUserSessionData $getUserSessionData
     ){
     }
@@ -65,7 +65,7 @@ readonly class AddUserPetAction
             'photoPath' => $photoPath
         ];
 
-        $command = new AddUserPetCommand($petData);
+        $command = new AddPetCommand($petData);
         $message = $this->addUserPet->__invoke($command);
         echo Flight::view()->render('userPanel.twig',['message' => $message]);
     }

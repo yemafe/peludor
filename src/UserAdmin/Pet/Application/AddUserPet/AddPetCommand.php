@@ -1,10 +1,10 @@
 <?php
 
-namespace Peludors\UserAdmin\User\Application\AddUserPet;
+namespace Peludors\UserAdmin\Pet\Application\AddUserPet;
 
 use AllowDynamicProperties;
 
-#[AllowDynamicProperties] class AddUserPetCommand
+#[AllowDynamicProperties] class AddPetCommand
 {
     public function __construct( array $data )
     {

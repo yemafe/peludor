@@ -1,10 +1,12 @@
 <?php
 
-namespace Peludors\UserAdmin\User\Infrastructure\Repository;
+namespace Peludors\UserAdmin\Pet\Infrastructure\Repositories;
 
 use Peludors\UserAdmin\Pet\Domain\Pet;
+use Peludors\UserAdmin\Pet\Domain\PetCollection;
+use Peludors\UserAdmin\Pet\Domain\PetRepository;
 use Peludors\UserAdmin\Pet\Infrastructure\Models\PetModel;
-use Peludors\UserAdmin\User\Domain\Pet\PetRepository;
+use Illuminate\Database\Capsule\Manager as DB;
 
 class PetMySQLRepository implements PetRepository
 {
@@ -22,14 +24,14 @@ class PetMySQLRepository implements PetRepository
     {
         $rows = DB::table('pet')->orderBy('deadDate', 'desc')->get();
         return PetCollection::fromRows($rows);    }
-
+    */
     public function getByUserID(int $userID): PetCollection
     {
         $rows = DB::table('pet')->where('userID', $userID)->get();
         return PetCollection::fromRows($rows);
-    }*/
+    }
 
-    public function getByUserIDAndName(int $userID, string $name): Pet
+    public function getByNameAndUserID(int $userID, string $name): Pet
     {
         $petModel = PetModel::where('userID', $userID)
             ->where('name', $name)

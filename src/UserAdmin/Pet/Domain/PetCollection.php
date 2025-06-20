@@ -37,8 +37,12 @@ use Traversable;
                 photo: $row->photo ?? null
             );
         }
-
         return new self($pets);
+    }
+
+    public function toArray(): array
+    {
+        return array_map(fn(Pet $pet) => $pet->toArray(), $this->pets);
     }
 
 }
