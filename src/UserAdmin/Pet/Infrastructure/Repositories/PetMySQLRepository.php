@@ -2,11 +2,10 @@
 
 namespace Peludors\UserAdmin\Pet\Infrastructure\Repositories;
 
-use Peludors\UserAdmin\Pet\Domain\Pet;
-use Peludors\UserAdmin\Pet\Domain\PetCollection;
-use Peludors\UserAdmin\Pet\Domain\PetRepository;
+use Peludors\Core\Pet\Domain\Pet;
+use Peludors\Core\Pet\Domain\PetCollection;
+use Peludors\Core\Pet\Domain\PetRepository;
 use Peludors\UserAdmin\Pet\Infrastructure\Models\PetModel;
-use Illuminate\Database\Capsule\Manager as DB;
 
 class PetMySQLRepository implements PetRepository
 {
@@ -17,17 +16,45 @@ class PetMySQLRepository implements PetRepository
 
     public function updateByEntity(Pet $pet): void
     {
-        PetModel::update($pet->toArray());
+        PetModel::where('id', $pet->id())->update($pet->toArray());
     }
 
-    /*public function getAllOrderedByDeadDate(): PetCollection
+    public function getForNextCommemoration(): PetCollection
     {
-        $rows = DB::table('pet')->orderBy('deadDate', 'desc')->get();
-        return PetCollection::fromRows($rows);    }
-    */
+        $rows = PetModel::select('*')
+            ->whereRaw("
+                STR_TO_DATE(
+                    CONCAT(YEAR(CURDATE()), '-', LPAD(MONTH(deadDate), 2, '0'), '-', LPAD(DAY(deadDate), 2, '0')),
+                    '%Y-%m-%d'
+                ) >= CURDATE()
+            ")
+            ->orderByRaw("
+                STR_TO_DATE(
+                    CONCAT(YEAR(CURDATE()), '-', LPAD(MONTH(deadDate), 2, '0'), '-', LPAD(DAY(deadDate), 2, '0')),
+                    '%Y-%m-%d'
+                )
+            ")
+            ->limit(6)
+            ->get();
+
+        return PetCollection::fromRows($rows);
+    }
+
     public function getByUserID(int $userID): PetCollection
     {
-        $rows = DB::table('pet')->where('userID', $userID)->get();
+        $rows = PetModel::where('userID', $userID)->get();
+        return PetCollection::fromRows($rows);
+    }
+
+    public function getThreeLatest(): PetCollection
+    {
+        $rows = PetModel::orderByDesc('id')->limit(3)->get();
+        return PetCollection::fromRows($rows);
+    }
+
+    public function getFeaturedTributes(): PetCollection
+    {
+        $rows = PetModel::whereIn('id', [5, 7, 9])->get();
         return PetCollection::fromRows($rows);
     }
 
@@ -36,7 +63,7 @@ class PetMySQLRepository implements PetRepository
         $petModel = PetModel::where('userID', $userID)
             ->where('name', $name)
             ->firstOrFail();
+
         return Pet::fromArray($petModel->toArray());
     }
-
 }

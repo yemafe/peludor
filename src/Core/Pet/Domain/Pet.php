@@ -1,6 +1,6 @@
 <?php
 
-namespace Peludors\UserAdmin\Pet\Domain;
+namespace Peludors\Core\Pet\Domain;
 
 class Pet
 {

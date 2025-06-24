@@ -2,8 +2,8 @@
 
 namespace Peludors\UserAdmin\Pet\Application\GetPetsByUser;
 
-use Peludors\UserAdmin\Pet\Domain\PetCollection;
-use Peludors\UserAdmin\Pet\Domain\PetRepository;
+use Peludors\Core\Pet\Domain\PetCollection;
+use Peludors\Core\Pet\Domain\PetRepository;
 
 readonly class GetPetsByUser
 {

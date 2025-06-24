@@ -3,8 +3,8 @@
 namespace Peludors\UserAdmin\Pet\Application\AddUserPet;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Peludors\UserAdmin\Pet\Domain\Pet;
-use Peludors\UserAdmin\Pet\Domain\PetRepository;
+use Peludors\Core\Pet\Domain\Pet;
+use Peludors\Core\Pet\Domain\PetRepository;
 
 class AddPet
 {

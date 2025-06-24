@@ -1,6 +1,6 @@
 <?php
 
-namespace Peludors\UserAdmin\Pet\Domain;
+namespace Peludors\Core\Pet\Domain;
 
 interface PetRepository
 {
@@ -11,4 +11,11 @@ interface PetRepository
     public function getByNameAndUserID(int $userID, string $name): Pet;
 
     public function getByUserID(int $userID): PetCollection;
+
+    public function getThreeLatest(): PetCollection;
+
+    public function getFeaturedTributes(): PetCollection;
+
+    public function getForNextCommemoration(): PetCollection;
+
 }
