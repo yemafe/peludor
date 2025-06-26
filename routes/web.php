@@ -9,6 +9,7 @@ use Peludors\UserAdmin\Pet\Infrastructure\Repositories\PetMySQLRepository;
 use Peludors\UserAdmin\User\Infrastructure\Controllers\SaveUserAction;
 use Peludors\UserAdmin\User\Infrastructure\Services\CheckUserIsLoggedIn;
 use Peludors\UserAdmin\User\Infrastructure\Services\GetUserSessionData;
+use Peludors\Web\Home\Application\RenderHome;
 use Peludors\Web\Home\Infrastructure\Controllers\RenderHomeAction;
 
 Flight::set('di', $container);
@@ -17,8 +18,10 @@ Flight::before('start', function (&$params, &$output) use ($container) {
 });
 
 Flight::route('GET /', function () use ($container){
-    $userCookieData = (new GetUserSessionData())();
-    $container->get(RenderHomeAction::class)($userCookieData);
+    //$container->get(RenderHomeAction::class);
+    (new RenderHomeAction(
+        new RenderHome(new PetMySQLRepository())
+    ))();
 });
 
 

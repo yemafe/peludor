@@ -7,7 +7,7 @@ use Peludors\Core\Pet\Domain\PetRepository;
 readonly class RenderHome
 {
     public function __construct(
-        private PetRepository $petRepository,
+        private PetRepository $petRepository
     ){
     }
 
@@ -17,10 +17,21 @@ readonly class RenderHome
         $featuredTributes = $this->petRepository->getFeaturedTributes();
         $nextCommemorations = $this->petRepository->getForNextCommemoration();
 
+        $latestPetsFormatted = [];
+        foreach ($latestTributes as $pet) {
+            $latestPetsFormatted[] = [
+                'name' => $pet->name(),
+                'breed' => $pet->breed(), //iconito según typo
+                'birthDate' => $pet->birthDate(), //pasar a fecha legible
+                'biography' => $pet->biography(),
+                'photo' => $pet->photo(),
+            ];
+        }
+
         return [
-            'latestTributes' => $this->getThreeLatestTributes,
-            'featuredTributes' => $this->getFeaturedTributes,
-            'nextCommemorations' => $this->nextCommemorations
+            'latestTributes' => $latestPetsFormatted, // probando
+            'featuredTributes' => $featuredTributes,
+            'nextCommemorations' => $nextCommemorations
         ];
     }
 }

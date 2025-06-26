@@ -24,13 +24,13 @@ class PetMySQLRepository implements PetRepository
         $rows = PetModel::select('*')
             ->whereRaw("
                 STR_TO_DATE(
-                    CONCAT(YEAR(CURDATE()), '-', LPAD(MONTH(deadDate), 2, '0'), '-', LPAD(DAY(deadDate), 2, '0')),
+                    CONCAT(YEAR(CURDATE()), '-', LPAD(MONTH(deathDate), 2, '0'), '-', LPAD(DAY(deathDate), 2, '0')),
                     '%Y-%m-%d'
                 ) >= CURDATE()
             ")
             ->orderByRaw("
                 STR_TO_DATE(
-                    CONCAT(YEAR(CURDATE()), '-', LPAD(MONTH(deadDate), 2, '0'), '-', LPAD(DAY(deadDate), 2, '0')),
+                    CONCAT(YEAR(CURDATE()), '-', LPAD(MONTH(deathDate), 2, '0'), '-', LPAD(DAY(deathDate), 2, '0')),
                     '%Y-%m-%d'
                 )
             ")

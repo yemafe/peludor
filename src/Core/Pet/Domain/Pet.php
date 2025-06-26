@@ -54,4 +54,39 @@ class Pet
     {
         return $this->userID;
     }
+
+    public function name(): string
+    {
+        return $this->name;
+    }
+
+    public function breed(): ?string
+    {
+        return $this->breed;
+    }
+
+    public function deathDate(): int
+    {
+        return $this->deathDate;
+    }
+
+    public function birthDate(): int
+    {
+        return $this->birthDate;
+    }
+
+    public function type(): string
+    {
+        return $this->type;
+    }
+
+    public function biography(): ?string
+    {
+        return $this->biography;
+    }
+
+    public function photo(): ?string
+    {
+        return $this->photo;
+    }
 }
