@@ -2,11 +2,10 @@
 namespace Peludors\Web\Home\Infrastructure\Controllers;
 
 use Flight;
-use Peludors\Core\Pet\Domain\PetRepository;
 use Peludors\Web\Home\Application\RenderHome;
 use Peludors\Web\Home\Application\RenderHomeQuery;
 
-class RenderHomeAction
+readonly class RenderHomeAction
 {
     public function __construct(
         private RenderHome $renderHome
