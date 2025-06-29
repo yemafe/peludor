@@ -13,7 +13,7 @@ readonly class RenderHomeAction
 
     public function __invoke(): void
     {
-        $query = new RenderHomeQuery();
+        $query = new RenderHomeQuery(); //usar el query...
         $result = $this->renderHome->__invoke($query);
         echo Flight::view()->render('index.twig', [
             'homeSections' => $result
