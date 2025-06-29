@@ -19,27 +19,6 @@ class PetMySQLRepository implements PetRepository
         PetModel::where('id', $pet->id())->update($pet->toArray());
     }
 
-    public function getForNextCommemoration(): PetCollection
-    {
-        $rows = PetModel::select('*')
-            ->whereRaw("
-                STR_TO_DATE(
-                    CONCAT(YEAR(CURDATE()), '-', LPAD(MONTH(deathDate), 2, '0'), '-', LPAD(DAY(deathDate), 2, '0')),
-                    '%Y-%m-%d'
-                ) >= CURDATE()
-            ")
-            ->orderByRaw("
-                STR_TO_DATE(
-                    CONCAT(YEAR(CURDATE()), '-', LPAD(MONTH(deathDate), 2, '0'), '-', LPAD(DAY(deathDate), 2, '0')),
-                    '%Y-%m-%d'
-                )
-            ")
-            ->limit(6)
-            ->get();
-
-        return PetCollection::fromRows($rows);
-    }
-
     public function getByUserID(int $userID): PetCollection
     {
         $rows = PetModel::where('userID', $userID)->get();

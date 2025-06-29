@@ -16,6 +16,4 @@ interface PetRepository
 
     public function getFeaturedTributes(): PetCollection;
 
-    public function getForNextCommemoration(): PetCollection;
-
 }

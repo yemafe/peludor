@@ -2,6 +2,7 @@
 
 namespace Peludors\Web\Home\Application;
 
+use Peludors\Core\Pet\Domain\PetCollection;
 use Peludors\Core\Pet\Domain\PetRepository;
 
 readonly class RenderHome
@@ -13,10 +14,21 @@ readonly class RenderHome
 
     public function __invoke(): array
     {
-        $latestTributes = $this->petRepository->getThreeLatest();
-        $featuredTributes = $this->petRepository->getFeaturedTributes();
-        $nextCommemorations = $this->petRepository->getForNextCommemoration();
+        $threeLatestPetTributes = $this->petRepository->getThreeLatest();
+        $featuredPetTributes = $this->petRepository->getFeaturedTributes();
 
+        $threeLatestPetTributesFormatted = $this->processTributes($threeLatestPetTributes);
+        $featuredPetTributesFormatted = $this->processTributes($featuredPetTributes);
+
+        return [
+            'threeLatestPetTributes' => $threeLatestPetTributesFormatted,
+            'featuredPetTributes' => $featuredPetTributesFormatted
+        ];
+    }
+
+
+    private function processTributes(PetCollection $latestTributes): array
+    {
         $latestPetsFormatted = [];
         foreach ($latestTributes as $pet) {
             $latestPetsFormatted[] = [
@@ -27,11 +39,6 @@ readonly class RenderHome
                 'photo' => $pet->photo(),
             ];
         }
-
-        return [
-            'latestTributes' => $latestPetsFormatted, // probando
-            'featuredTributes' => $featuredTributes,
-            'nextCommemorations' => $nextCommemorations
-        ];
+        return $latestPetsFormatted;
     }
 }
