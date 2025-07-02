@@ -85,8 +85,18 @@ class Pet
         return $this->biography;
     }
 
+    public function farewell(): ?string
+    {
+        return $this->farewell;
+    }
+
     public function photo(): ?string
     {
         return $this->photo;
+    }
+
+    public function mixedBreed(): bool
+    {
+        return $this->mixedBreed;
     }
 }

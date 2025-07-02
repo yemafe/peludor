@@ -13,98 +13,10 @@
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
     </div>
-
-    <!-- magazine Start -->
-    {#<div class="container-xxl py-5 px-4">
-        <div class="container">
-            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="section-title bg-white text-center text-primary px-3 mb-4">Noticias</p>
-            </div>
-            <div class="row gx-4">
-                <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="product-item">
-                        <div class="position-relative">
-                            <img class="img-fluid" src="/img/product-1.jpg" alt="">
-                            <div class="product-overlay">
-                                <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                                <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center p-4">
-                            <a class="d-block h5" href="">Vasillas de ceniza</a>
-                            <span class="text-primary me-1">$19.00</span>
-                            <span class="text-decoration-line-through">$29.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="product-item">
-                        <div class="position-relative">
-                            <img class="img-fluid" src="/img/product-2.jpg" alt="">
-                            <div class="product-overlay">
-                                <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                                <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center p-4">
-                            <a class="d-block h5" href="">Guarda mechones de pelo</a>
-                            <span class="text-primary me-1">$19.00</span>
-                            <span class="text-decoration-line-through">$29.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="product-item">
-                        <div class="position-relative">
-                            <img class="img-fluid" src="/img/product-3.jpg" alt="">
-                            <div class="product-overlay">
-                                <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                                <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center p-4">
-                            <a class="d-block h5" href="">Cuadros correa</a>
-                            <span class="text-primary me-1">$19.00</span>
-                            <span class="text-decoration-line-through">$29.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="product-item">
-                        <div class="position-relative">
-                            <img class="img-fluid" src="/img/product-4.jpg" alt="">
-                            <div class="product-overlay">
-                                <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-link"></i></a>
-                                <a class="btn btn-square btn-secondary rounded-circle m-1" href=""><i class="bi bi-cart"></i></a>
-                            </div>
-                        </div>
-                        <div class="text-center p-4">
-                            <a class="d-block h5" href="">Fotos</a>
-                            <span class="text-primary me-1">$19.00</span>
-                            <span class="text-decoration-line-through">$29.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>#}
-
     <!-- obituary Start -->
 
     <div class="container-xxl py-5">
         <div class="container">
-            <!--<div class="text-center mx-auto pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="section-title bg-white text-center text-primary px-3">Obituario</p>
-                <h1 class="mb-5">Homenajes a mascotas</h1>
-                <p>
-                    {% if homeSections['latestTributes'] is not empty %}
-                        {% for pet in homeSections['latestTributes'] %}
-                            <h1>{{ pet.name }}</h1>
-                        {% endfor %}
-                    {% endif %}
-                </p>
-            </div>-->
-
             <div class="text-center mx-auto pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                 <p class="section-title bg-white text-center text-primary px-3">Obituario</p>
                 <h1 class="mb-5">Homenajes a mascotas</h1>
@@ -130,90 +42,58 @@
                     {% endfor %}
                 </div>
             </div>
-
-
-            <! --IA V2 -->
-            <div class="text-center mx-auto pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="section-title bg-white text-center text-primary px-3">Obituario</p>
-                <h1 class="mb-5">Homenajes a mascotas</h1>
-
-                <div class="row g-4 justify-content-center">
-                    {% for pet in homeSections['latestTributes'] %}
-                        <div class="col-md-6 col-lg-4">
-                            <div class="wow zoomIn" data-wow-delay="0.{{ loop.index }}s">
-                                <div class="card border-0 shadow-lg h-100 rounded-4 overflow-hidden">
-                                    <div class="card-body text-center p-4 bg-light">
-                                        <div class="mb-3">
-                                            <i class="fas fa-paw fa-2x text-primary"></i>
-                                        </div>
-                                        <h5 class="card-title text-primary fw-bold">{{ pet.name }}</h5>
-
-                                        {% if pet.type %}
-                                            <p class="card-text text-dark mb-1"><strong>Tipo:</strong> {{ pet.type }}</p>
-                                        {% endif %}
-                                        {% if pet.breed %}
-                                            <p class="card-text text-dark mb-1"><strong>Raza:</strong> {{ pet.breed }}</p>
-                                        {% endif %}
-                                        {% if pet.userID %}
-                                            <p class="card-text text-muted small">ID de usuario: {{ pet.userID }}</p>
-                                        {% endif %}
+                <div class="row gy-5 gx-4">
+                    {% for pet in homeSections['threeLatestPetTributes'] %}
+                        <div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="service-item d-flex h-100">
+                                <div class="service-img">
+                                    <p>{{ pet.photo }}</p>
+                                    <img class="img-fluid" src="{{ pet.photo }}" alt=""> <! -- /img/service-1.jpg -->
+                                </div>
+                                <div class="service-text p-5 pt-0">
+                                    <div class="service-icon">
+                                        <img class="img-fluid rounded-circle" src="/img/service-1.jpg" alt="">
                                     </div>
-                                    <div class="card-footer bg-white border-0 text-center py-3">
-                                        <span class="badge bg-primary-subtle text-primary">En recuerdo</span>
-                                    </div>
+                                    <h5 class="mb-3">{{ pet.name }}</h5>
+                                    <p class="mb-4">{{ pet.breed }}</p>
+                                    <p class="mb-4">{{ pet.date }}</p>
+                                    <p class="mb-4">{{ pet.farewell }}</p>
+                                    <a class="btn btn-square rounded-circle" href=""><i class="bi bi-chevron-double-right"></i></a>
                                 </div>
                             </div>
                         </div>
+
+                        {#<div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="service-item d-flex h-100">
+                                <div class="service-img">
+                                    <img class="img-fluid" src="/img/service-2.jpg" alt="">
+                                </div>
+                                <div class="service-text p-5 pt-0">
+                                    <div class="service-icon">
+                                        <img class="img-fluid rounded-circle" src="/img/service-2.jpg" alt="">
+                                    </div>
+                                    <h5 class="mb-3">Breeding & Veterinary</h5>
+                                    <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                                    <a class="btn btn-square rounded-circle" href=""><i class="bi bi-chevron-double-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="service-item d-flex h-100">
+                                <div class="service-img">
+                                    <img class="img-fluid" src="/img/service-3.jpg" alt="">
+                                </div>
+                                <div class="service-text p-5 pt-0">
+                                    <div class="service-icon">
+                                        <img class="img-fluid rounded-circle" src="/img/service-3.jpg" alt="">
+                                    </div>
+                                    <h5 class="mb-3">Care & Milking</h5>
+                                    <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                                    <a class="btn btn-square rounded-circle" href=""><i class="bi bi-chevron-double-right"></i></a>
+                                </div>
+                            </div>
+                        </div>#}
                     {% endfor %}
-                </div>
-            </div>
-
-
-            <div class="row gy-5 gx-4">
-                <div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item d-flex h-100">
-                        <div class="service-img">
-                            <img class="img-fluid" src="/img/service-1.jpg" alt="">
-                        </div>
-                        <div class="service-text p-5 pt-0">
-                            <div class="service-icon">
-                                <img class="img-fluid rounded-circle" src="/img/service-1.jpg" alt="">
-                            </div>
-                            <h5 class="mb-3">Best Animal Selection</h5>
-                            <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
-                            <a class="btn btn-square rounded-circle" href=""><i class="bi bi-chevron-double-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item d-flex h-100">
-                        <div class="service-img">
-                            <img class="img-fluid" src="/img/service-2.jpg" alt="">
-                        </div>
-                        <div class="service-text p-5 pt-0">
-                            <div class="service-icon">
-                                <img class="img-fluid rounded-circle" src="/img/service-2.jpg" alt="">
-                            </div>
-                            <h5 class="mb-3">Breeding & Veterinary</h5>
-                            <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
-                            <a class="btn btn-square rounded-circle" href=""><i class="bi bi-chevron-double-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item d-flex h-100">
-                        <div class="service-img">
-                            <img class="img-fluid" src="/img/service-3.jpg" alt="">
-                        </div>
-                        <div class="service-text p-5 pt-0">
-                            <div class="service-icon">
-                                <img class="img-fluid rounded-circle" src="/img/service-3.jpg" alt="">
-                            </div>
-                            <h5 class="mb-3">Care & Milking</h5>
-                            <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
-                            <a class="btn btn-square rounded-circle" href=""><i class="bi bi-chevron-double-right"></i></a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

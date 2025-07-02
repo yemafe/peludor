@@ -4,6 +4,7 @@ namespace Peludors\Web\Home\Application;
 
 use Peludors\Core\Pet\Domain\PetCollection;
 use Peludors\Core\Pet\Domain\PetRepository;
+use Peludors\Shared\Domain\ValueObject\Date;
 
 readonly class RenderHome
 {
@@ -33,10 +34,10 @@ readonly class RenderHome
         foreach ($latestTributes as $pet) {
             $latestPetsFormatted[] = [
                 'name' => $pet->name(),
-                'breed' => $pet->breed(), //iconito según typo
-                'birthDate' => $pet->birthDate(), //pasar a fecha legible
-                'biography' => $pet->biography(),
-                'photo' => $pet->photo(),
+                'breed' => $pet->mixedBreed() ? 'mix de ' . $pet->breed() : $pet->breed(),
+                'date' => Date::fromTimestamp($pet->birthDate())->__toString() . ' - '. Date::fromTimestamp($pet->deathDate())->__toString(),
+                'farewell' => $pet->farewell(),
+                'photo' => 'http://localhost/uploads/users/photo/pets/' .  $pet->photo(), //http://localhost:8000/uploads/users/photo/pets/pet_686157ccd7d7d.png ver bien la url
             ];
         }
         return $latestPetsFormatted;
