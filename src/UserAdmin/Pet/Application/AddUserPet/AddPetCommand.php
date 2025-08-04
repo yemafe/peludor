@@ -3,6 +3,7 @@
 namespace Peludors\UserAdmin\Pet\Application\AddUserPet;
 
 use AllowDynamicProperties;
+use DomainException;
 
 #[AllowDynamicProperties] class AddPetCommand
 {
@@ -18,6 +19,8 @@ use AllowDynamicProperties;
         $this->biography = $data['biography'];
         $this->farewell = $data['farewell'];
         $this->photoPath = $data['photoPath'];
+
+        $this->validate();
     }
 
     public function userID(): int
@@ -68,5 +71,20 @@ use AllowDynamicProperties;
     public function photoPath(): ?string
     {
         return $this->photoPath;
+    }
+
+    private function validate(): void
+    {
+        if ($this->deathDate < $this->birthDate) {
+            throw new DomainException('La fecha de fallecimiento no puede ser anterior a la de nacimiento.');
+        }
+
+        if (!preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s\-]{2,100}$/u', $this->name)) {
+            throw new DomainException('Nombre inválido.');
+        }
+
+        if (!in_array($this->type, ['perro', 'gato', 'otro'])) {
+            throw new DomainException('Tipo de mascota no válido.');
+        }
     }
 }

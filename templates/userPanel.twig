@@ -43,21 +43,22 @@
         <button id="add-pet-form-btn" class="btn btn-secondary rounded-pill py-2 px-4 mb-3">+ Añadir mascota</button>
 
         <div class="card p-4 border rounded shadow-sm bg-white d-none" id="pet-form-container">
+            <div id="form-alert" class="alert alert-danger d-none" role="alert"></div>
             <h3 class="mb-4">Añadir mascota al obituario</h3>
 
-            <form id="obituary-form" method="POST" enctype="multipart/form-data" action="/pet/add">
+            <form id="obituary-form" method="POST" enctype="multipart/form-data" action="/pet/add" autocomplete="off">
                 <div class="row g-3">
 
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="text" name="name" id="name" class="form-control" placeholder="Nombre" maxlength="100" required>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Nombre" maxlength="100" required pattern="[^<>]+" oninput="this.value=this.value.replace(/[<>]/g,'')">
                             <label for="name">Nombre del animal *</label>
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="form-floating">
-                            <select name="petType" id="petType" class="form-select" required>
+                            <select name="petType" id="petType" class="form-select form-select-sm" required>
                                 <option disabled selected>Selecciona tipo</option>
                                 <option value="perro">Perro</option>
                                 <option value="gato">Gato</option>
@@ -69,7 +70,7 @@
 
                     <div class="col-md-6 d-none" id="custom-type-container">
                         <div class="form-floating">
-                            <input type="text" name="customType" id="customType" class="form-control" placeholder="Tipo de mascota" maxlength="100">
+                            <input type="text" name="customType" id="customType" class="form-control" placeholder="Tipo de mascota" maxlength="100" pattern="[^<>]+" oninput="this.value=this.value.replace(/[<>]/g,'')">
                             <label for="customType">Especifica el tipo</label>
                         </div>
                     </div>
@@ -88,7 +89,7 @@
                             </label>
                         </div>
                         <div class="form-floating mt-2 d-none" id="custom-breed-container">
-                            <input type="text" name="customBreed" id="customBreed" class="form-control" placeholder="Introduce la raza" maxlength="100">
+                            <input type="text" name="customBreed" id="customBreed" class="form-control" placeholder="Introduce la raza" maxlength="100" pattern="[^<>]+" oninput="this.value=this.value.replace(/[<>]/g,'')">
                             <label for="custom-breed">Introduce la raza</label>
                         </div>
                     </div>
@@ -109,14 +110,14 @@
 
                     <div class="col-12">
                         <div class="form-floating">
-                            <textarea name="biography" id="biography" class="form-control" style="height: 100px" maxlength="255"></textarea>
+                            <textarea name="biography" id="biography" class="form-control" style="height: 100px" maxlength="255" pattern="[^<>]+" oninput="this.value=this.value.replace(/[<>]/g,'')"></textarea>
                             <label for="biography">Biografía</label>
                         </div>
                     </div>
 
                     <div class="col-12">
                         <div class="form-floating">
-                            <textarea name="farewell" id="farewell" class="form-control" style="height: 100px" maxlength="255"></textarea>
+                            <textarea name="farewell" id="farewell" class="form-control" style="height: 100px" maxlength="255" pattern="[^<>]+" oninput="this.value=this.value.replace(/[<>]/g,'')"></textarea>
                             <label for="farewell">Mensaje de despedida</label>
                         </div>
                     </div>
@@ -128,7 +129,7 @@
                     </div>
 
                     <div class="col-12 mt-3">
-                        <button type="submit" class="btn btn-success rounded-pill px-5 py-2">Guardar obituario</button>
+                        <button type="submit" class="btn btn-success rounded-pill px-5 py-2" aria-label="Guardar obituario de mascota">Guardar obituario</button>
                     </div>
 
                 </div>
@@ -159,6 +160,23 @@
                 alert('La imagen no debe superar los 5MB.');
                 event.target.value = '';
             }
+        });
+
+        const form = document.getElementById('obituary-form');
+        form.addEventListener('submit', function (e) {
+            const name = document.getElementById('name').value;
+            const birthDate = document.getElementById('birthDate').value;
+            const deathDate = document.getElementById('deathDate').value;
+            const alertBox = document.getElementById('form-alert');
+
+            if (new Date(deathDate) < new Date(birthDate)) {
+                e.preventDefault();
+                alertBox.textContent = 'La fecha de fallecimiento no puede ser anterior a la de nacimiento.';
+                alertBox.classList.remove('d-none');
+                return false;
+            }
+
+            alertBox.classList.add('d-none');
         });
     </script>
     <script src="/js/obituary-data.js"></script>
