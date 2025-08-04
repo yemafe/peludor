@@ -3,15 +3,15 @@
 namespace Peludors\UserAdmin\Pet\Infrastructure;
 
 use Flight;
-use Peludors\UserAdmin\Pet\Application\GetPetsByUser\GetPetsByUser;
-use Peludors\UserAdmin\Pet\Application\GetPetsByUser\GetPetsByUserQuery;
+use Peludors\UserAdmin\Pet\Application\GetPetsTributesByUser\GetPetsTributesByUser;
+use Peludors\UserAdmin\Pet\Application\GetPetsTributesByUser\GetPetsTributesByUserQuery;
 use Peludors\UserAdmin\User\Infrastructure\Services\GetUserSessionData;
 
-class GetPetsByUserAction
+class GetPetsTributesByUserAction
 {
     public function __construct(
-        protected GetPetsByUser $getPetsByUser,
-        protected GetUserSessionData $getUserSessionData
+        protected GetPetsTributesByUser $getPetsByUser,
+        protected GetUserSessionData    $getUserSessionData
     ){
     }
 
@@ -19,7 +19,7 @@ class GetPetsByUserAction
     {
         $userID = $this->getUserSessionData->__invoke()['userID'];
 
-        $command = new GetPetsByUserQuery($userID);
+        $command = new GetPetsTributesByUserQuery($userID);
         $pets = $this->getPetsByUser->__invoke($command);
         if (session_status() === PHP_SESSION_NONE) {
             session_start();

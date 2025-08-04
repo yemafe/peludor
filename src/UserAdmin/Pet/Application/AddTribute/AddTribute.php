@@ -1,26 +1,26 @@
 <?php
 
-namespace Peludors\UserAdmin\Pet\Application\AddUserPet;
+namespace Peludors\UserAdmin\Pet\Application\AddTribute;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Peludors\Core\Pet\Domain\Pet;
-use Peludors\Core\Pet\Domain\PetRepository;
+use Peludors\Core\Pet\Domain\PetTribute;
+use Peludors\Core\Pet\Domain\PetTributeRepository;
 
-class AddPet
+class AddTribute
 {
     public function __construct(
-        protected PetRepository $petRepository
+        protected PetTributeRepository $petRepository
     ) {
     }
 
-    public function __invoke(AddPetCommand $command): string
+    public function __invoke(AddTributeCommand $command): string
     {
         $petName = $command->name();
         try {
             $this->petRepository->getByNameAndUserID($command->userID(), $petName);
             return 'Ya tienes una mascota con el nombre ' . $petName;
         }catch (ModelNotFoundException $exception) {
-            $pet = Pet::fromArray([
+            $pet = PetTribute::fromArray([
                 'userID' => $command->userID(),
                 'name' => $petName,
                 'type' => $command->type(),

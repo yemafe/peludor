@@ -2,15 +2,15 @@
 
 namespace Peludors\Web\Home\Application;
 
-use Peludors\Core\Pet\Domain\PetCollection;
-use Peludors\Core\Pet\Domain\PetRepository;
+use Peludors\Core\Pet\Domain\PetTributeCollection;
+use Peludors\Core\Pet\Domain\PetTributeRepository;
 use Peludors\Shared\Domain\ValueObject\Date;
 use Peludors\Shared\Infrastructure\Services\UrlBuilder;
 
 readonly class RenderHome
 {
     public function __construct(
-        private PetRepository $petRepository
+        private PetTributeRepository $petRepository
     ){
     }
 
@@ -29,7 +29,7 @@ readonly class RenderHome
     }
 
 
-    private function processTributes(PetCollection $latestTributes): array
+    private function processTributes(PetTributeCollection $latestTributes): array
     {
         $latestPetsFormatted = [];
         foreach ($latestTributes as $pet) {

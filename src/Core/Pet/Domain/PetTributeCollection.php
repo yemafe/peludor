@@ -7,7 +7,7 @@ use ArrayIterator;
 use IteratorAggregate;
 use Traversable;
 
-#[AllowDynamicProperties] class PetCollection implements IteratorAggregate
+#[AllowDynamicProperties] class PetTributeCollection implements IteratorAggregate
 {
     public function getIterator(): Traversable
     {
@@ -24,7 +24,7 @@ use Traversable;
         $pets = [];
 
         foreach ($rows as $row) {
-            $pets[] = new Pet(
+            $pets[] = new PetTribute(
                 userID: $row->userID,
                 name: $row->name,
                 type: $row->type,
@@ -42,7 +42,7 @@ use Traversable;
 
     public function toArray(): array
     {
-        return array_map(fn(Pet $pet) => $pet->toArray(), $this->pets);
+        return array_map(fn(PetTribute $pet) => $pet->toArray(), $this->pets);
     }
 
 }

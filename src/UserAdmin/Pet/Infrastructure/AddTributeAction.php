@@ -5,14 +5,14 @@ namespace Peludors\UserAdmin\Pet\Infrastructure;
 use DomainException;
 use Flight;
 use Peludors\Shared\Infrastructure\Services\TextSanitizer;
-use Peludors\UserAdmin\Pet\Application\AddUserPet\AddPet;
-use Peludors\UserAdmin\Pet\Application\AddUserPet\AddPetCommand;
+use Peludors\UserAdmin\Pet\Application\AddTribute\AddTribute;
+use Peludors\UserAdmin\Pet\Application\AddTribute\AddTributeCommand;
 use Peludors\UserAdmin\User\Infrastructure\Services\GetUserSessionData;
 
-readonly class AddPetAction
+readonly class AddTributeAction
 {
     public function __construct(
-        protected AddPet $addUserPet,
+        protected AddTribute         $addUserPet,
         protected GetUserSessionData $getUserSessionData
     ){
     }
@@ -67,7 +67,7 @@ readonly class AddPetAction
         ];
 
         try {
-            $command = new AddPetCommand($petData);
+            $command = new AddTributeCommand($petData);
             $message = $this->addUserPet->__invoke($command);
             $_SESSION['flash_message'] = $message;
             Flight::redirect('/userPanel');

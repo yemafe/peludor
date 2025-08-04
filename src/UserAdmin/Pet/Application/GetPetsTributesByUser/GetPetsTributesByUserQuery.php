@@ -1,8 +1,8 @@
 <?php
 
-namespace Peludors\UserAdmin\Pet\Application\GetPetsByUser;
+namespace Peludors\UserAdmin\Pet\Application\GetPetsTributesByUser;
 
-readonly class GetPetsByUserQuery
+readonly class GetPetsTributesByUserQuery
 {
     public function __construct(
         private int $id

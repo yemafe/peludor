@@ -1,11 +1,11 @@
 <?php
 $container = require __DIR__ . '/../src/Core/Config/Classes.php';
 
-use Peludors\UserAdmin\Pet\Application\AddUserPet\AddPet;
-use Peludors\UserAdmin\Pet\Application\GetPetsByUser\GetPetsByUser;
-use Peludors\UserAdmin\Pet\Infrastructure\AddPetAction;
-use Peludors\UserAdmin\Pet\Infrastructure\GetPetsByUserAction;
-use Peludors\UserAdmin\Pet\Infrastructure\Repositories\PetMySQLRepository;
+use Peludors\UserAdmin\Pet\Application\AddTribute\AddTribute;
+use Peludors\UserAdmin\Pet\Application\GetPetsTributesByUser\GetPetsTributesByUser;
+use Peludors\UserAdmin\Pet\Infrastructure\AddTributeAction;
+use Peludors\UserAdmin\Pet\Infrastructure\GetPetsTributesByUserAction;
+use Peludors\UserAdmin\Pet\Infrastructure\Repositories\PetTributeMySQLRepository;
 use Peludors\UserAdmin\User\Infrastructure\Controllers\SaveUserAction;
 use Peludors\UserAdmin\User\Infrastructure\Services\CheckUserIsLoggedIn;
 use Peludors\UserAdmin\User\Infrastructure\Services\GetUserSessionData;
@@ -20,7 +20,7 @@ Flight::before('start', function (&$params, &$output) use ($container) {
 Flight::route('GET /', function () use ($container){
     //$container->get(RenderHomeAction::class);
     (new RenderHomeAction(
-        new RenderHome(new PetMySQLRepository())
+        new RenderHome(new PetTributeMySQLRepository())
     ))();
 });
 
@@ -30,8 +30,8 @@ Flight::route('/login', function () use ($container){
 });
 
 Flight::route('GET /userPanel', function () use ($container){
-    (new GetPetsByUserAction(
-        new GetPetsByUser(new PetMySQLRepository()),
+    (new GetPetsTributesByUserAction(
+        new GetPetsTributesByUser(new PetTributeMySQLRepository()),
         new GetUserSessionData()
     ))();
     //echo Flight::view()->render('userPanel.twig');
@@ -45,9 +45,9 @@ Flight::route('POST /login/google/callback', function () {
     (new SaveUserAction())();
 });
 
-Flight::route('POST /pet/add' , function(){
-    (new AddPetAction(
-        new AddPet(new PetMySQLRepository()),
+Flight::route('POST /tribute/add' , function(){
+    (new AddTributeAction(
+        new AddTribute(new PetTributeMySQLRepository()),
         new GetUserSessionData()
     ))();
 });

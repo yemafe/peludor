@@ -1,11 +1,11 @@
 <?php
 
-namespace Peludors\UserAdmin\Pet\Application\AddUserPet;
+namespace Peludors\UserAdmin\Pet\Application\AddTribute;
 
 use AllowDynamicProperties;
 use DomainException;
 
-#[AllowDynamicProperties] class AddPetCommand
+#[AllowDynamicProperties] class AddTributeCommand
 {
     public function __construct( array $data )
     {

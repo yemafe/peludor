@@ -4,9 +4,9 @@ namespace Peludors\UserAdmin\Pet\Infrastructure\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PetModel extends Model
+class PetTributeModel extends Model
 {
-    protected $table = 'pet';
+    protected $table = 'pet_tribute';
 
     protected $fillable = [
         'userID',

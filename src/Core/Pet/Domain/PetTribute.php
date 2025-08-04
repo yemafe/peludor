@@ -2,7 +2,7 @@
 
 namespace Peludors\Core\Pet\Domain;
 
-class Pet
+class PetTribute
 {
     public function __construct(
         protected int $userID,
