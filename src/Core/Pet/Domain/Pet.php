@@ -99,4 +99,8 @@ class Pet
     {
         return $this->mixedBreed;
     }
+
+    public function hasPhoto(): bool{
+        return !empty($this->photo);
+    }
 }

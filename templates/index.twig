@@ -13,14 +13,13 @@
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
     </div>
-    <!-- obituary Start -->
 
+    <!-- obituary Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto pb-4 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                 <p class="section-title bg-white text-center text-primary px-3">Obituario</p>
                 <h1 class="mb-5">Homenajes a mascotas</h1>
-
                 <div class="row g-4 justify-content-center">
                     {% for pet in homeSections['latestTributes'] %}
                             <div class="col-md-6 col-lg-4">
@@ -47,18 +46,21 @@
                         <div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.1s">
                             <div class="service-item d-flex h-100">
                                 <div class="service-img">
-                                    <p>{{ pet.photo }}</p>
-                                    <img class="img-fluid" src="{{ pet.photo }}" alt=""> <! -- /img/service-1.jpg -->
+                                    <img class="img-fluid" src="{{ pet.photoURL }}" alt="user pet photo">
                                 </div>
                                 <div class="service-text p-5 pt-0">
                                     <div class="service-icon">
-                                        <img class="img-fluid rounded-circle" src="/img/service-1.jpg" alt="">
+                                        <img class="img-fluid rounded-circle" src="{{ pet.photoURL }}" alt="">
                                     </div>
                                     <h5 class="mb-3">{{ pet.name }}</h5>
                                     <p class="mb-4">{{ pet.breed }}</p>
                                     <p class="mb-4">{{ pet.date }}</p>
                                     <p class="mb-4">{{ pet.farewell }}</p>
-                                    <a class="btn btn-square rounded-circle" href=""><i class="bi bi-chevron-double-right"></i></a>
+                                    <a class="btn btn-square rounded-circle" href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="16" height="16" fill="currentColor">
+                                            <path d="M285.5 272H12c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h273.5l-99.3-99.3c-4.7-4.7-4.7-12.3 0-17L198.6 117c4.7-4.7 12.3-4.7 17 0l136 136c4.7 4.7 4.7 12.3 0 17l-136 136c-4.7 4.7-12.3 4.7-17 0l-17.5-17.5c-4.7-4.7-4.7-12.3 0-17l99.4-99.5z"/>
+                                        </svg>
+                                    </a>
                                 </div>
                             </div>
                         </div>
