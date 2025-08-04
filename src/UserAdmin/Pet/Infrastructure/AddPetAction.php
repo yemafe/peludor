@@ -2,7 +2,9 @@
 
 namespace Peludors\UserAdmin\Pet\Infrastructure;
 
+use DomainException;
 use Flight;
+use Peludors\Shared\Infrastructure\Services\TextSanitizer;
 use Peludors\UserAdmin\Pet\Application\AddUserPet\AddPet;
 use Peludors\UserAdmin\Pet\Application\AddUserPet\AddPetCommand;
 use Peludors\UserAdmin\User\Infrastructure\Services\GetUserSessionData;
@@ -17,19 +19,18 @@ readonly class AddPetAction
 
     public function __invoke():void
     {
-        $name = trim($_POST['name']);
-        $type = $_POST['petType'];
-        $customType = trim($_POST['customType']);
-        $breed = $_POST['breed'] ?? null;
-        $customBreed = trim($_POST['customBreed'] );
+        $name = TextSanitizer::sanitize($_POST['name'] ?? '');
+        $type = TextSanitizer::sanitize($_POST['petType'] ?? '');
+        $customType = TextSanitizer::sanitize($_POST['customType'] ?? '');
+        $breed = isset($_POST['breed']) ? TextSanitizer::sanitize($_POST['breed']) : null;
+        $customBreed = isset($_POST['customBreed']) ? TextSanitizer::sanitize($_POST['customBreed']) : null;
         $birthDate = strtotime($_POST['birthDate']);
         $deathDate = strtotime($_POST['deathDate']);
         $mixedBreed = $_POST['mixedBreed'] ?? 0;
-        $biography = trim($_POST['biography'] ?? null);
-        $farewell = trim($_POST['farewell'] ?? null);
+        $biography = isset($_POST['biography']) ? TextSanitizer::sanitize($_POST['biography']) : null;
+        $farewell = isset($_POST['farewell']) ? TextSanitizer::sanitize($_POST['farewell']) : null;
         $finalType = ($type === 'otro') ? $customType : $type;
         $finalBreed = ($breed === 'Otro') ? $customBreed : $breed;
-
 
         $photoPath = null;
         if (!empty($_FILES['photo']['tmp_name'])) {
@@ -65,14 +66,17 @@ readonly class AddPetAction
             'photoPath' => $photoPath
         ];
 
-        $command = new AddPetCommand($petData);
-        $message = $this->addUserPet->__invoke($command);
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
+        try {
+            $command = new AddPetCommand($petData);
+            $message = $this->addUserPet->__invoke($command);
+            $_SESSION['flash_message'] = $message;
+            Flight::redirect('/userPanel');
+        } catch (DomainException $e) {
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            $_SESSION['flash_message'] = $e->getMessage();
+            Flight::redirect('/userPanel');
         }
-        $_SESSION['flash_message'] = $message;
-        Flight::redirect('/userPanel');
     }
-
-
 }
