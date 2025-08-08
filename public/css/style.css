@@ -316,8 +316,8 @@
     width: 140px;
     height: 140px;
     padding: 15px;
-    margin-top: -70px;
-    margin-bottom: 40px;
+    /*margin-top: -70px;*/
+    /*margin-bottom: 40px;*/
     background: #FFFFFF;
     border-radius: 140px;
     overflow: hidden;
@@ -343,6 +343,13 @@
 .service-item .service-text .btn:hover {
     color: var(--dark);
     background: var(--secondary);
+}
+
+.service-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 
@@ -554,6 +561,31 @@
 }
 
 
+/* index medalla*/
+.medalla {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #fff;
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
 
+.medalla img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
+.base {
+    position: relative;
+    padding-top: 60px; /* espacio para la medalla */
+    border-radius: 8px;
+    box-shadow: 0 0 45px rgba(0, 0, 0, .07);
+}
 
