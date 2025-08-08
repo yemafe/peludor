@@ -9,7 +9,7 @@
     <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 {% endblock %}
 {% block content %}
-    <!-- Spinner Start  ??? que es esto?? -->
+
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
     </div>
@@ -44,25 +44,8 @@
                 <div class="row gy-5 gx-4">
                     {% for pet in homeSections['threeLatestPetTributes'] %}
                         <div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.1s">
-
-                            <!-- Card nueva poner el efecto over y listo -->
                             <a href="" class="pet-card-link">
-                                <div class="base text-center d-flex" >
-                                    <div class="medalla">
-                                        <img src="{{ pet.photoURL }}" alt="Imagen">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Gregorio</h5>
-                                        <p class="card-text">Golden Retriever</p>
-                                        <p class="card-text">05/06/2025 - 01/08/2025</p>
-                                        <p class="card-text">Adiós perrete</p>
-                                    </div>
-                                </div>
-                            </a>
-
-
-                            <a href="" class="pet-card-link">
-                                <div class="service-item d-flex h-100">
+                                <div class="service-item">
                                 <div class="service-img">
                                     <img class="img-fluid" src="{{ pet.photoURL }}" alt="user pet photo">
                                 </div>
@@ -83,42 +66,6 @@
                             </div>
                             </a>
                         </div>
-
-
-
-
-
-
-                        {#<div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="service-item d-flex h-100">
-                                <div class="service-img">
-                                    <img class="img-fluid" src="/img/service-2.jpg" alt="">
-                                </div>
-                                <div class="service-text p-5 pt-0">
-                                    <div class="service-icon">
-                                        <img class="img-fluid rounded-circle" src="/img/service-2.jpg" alt="">
-                                    </div>
-                                    <h5 class="mb-3">Breeding & Veterinary</h5>
-                                    <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
-                                    <a class="btn btn-square rounded-circle" href=""><i class="bi bi-chevron-double-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="service-item d-flex h-100">
-                                <div class="service-img">
-                                    <img class="img-fluid" src="/img/service-3.jpg" alt="">
-                                </div>
-                                <div class="service-text p-5 pt-0">
-                                    <div class="service-icon">
-                                        <img class="img-fluid rounded-circle" src="/img/service-3.jpg" alt="">
-                                    </div>
-                                    <h5 class="mb-3">Care & Milking</h5>
-                                    <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
-                                    <a class="btn btn-square rounded-circle" href=""><i class="bi bi-chevron-double-right"></i></a>
-                                </div>
-                            </div>
-                        </div>#}
                     {% endfor %}
                 </div>
             </div>
