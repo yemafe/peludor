@@ -29,4 +29,9 @@ final class UrlBuilder
     {
         return self::baseUrl() . "/img/rodent-default.jpg";
     }
+
+    public static function candleImage(): string
+    {
+        return self::baseUrl() . "/img/candle.png";
+    }
 }

@@ -53,15 +53,59 @@
                                     <div class="service-icon">
                                         <img class="img-fluid rounded-circle" src="{{ pet.photoURL }}" alt="">
                                     </div>
-                                    <p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="currentColor">
-                                            <path d="M256 224c-79.41 0-192 122.76-192 200.25 0 34.9 26.81 55.75 71.74 55.75 48.84 0 81.09-25.08 120.26-25.08 39.51 0 71.85 25.08 120.26 25.08 44.93 0 71.74-20.85 71.74-55.75C448 346.76 335.41 224 256 224zm-147.28-12.61c-10.4-34.65-42.44-57.09-71.56-50.13-29.12 6.96-44.29 40.69-33.89 75.34 10.4 34.65 42.44 57.09 71.56 50.13 29.12-6.96 44.29-40.69 33.89-75.34zm84.72-20.78c30.94-8.14 46.42-49.94 34.58-93.36s-46.52-72.01-77.46-63.87-46.42 49.94-34.58 93.36c11.84 43.42 46.53 72.02 77.46 63.87zm281.39-29.34c-29.12-6.96-61.15 15.48-71.56 50.13-10.4 34.65 4.77 68.38 33.89 75.34 29.12 6.96 61.15-15.48 71.56-50.13 10.4-34.65-4.77-68.38-33.89-75.34zm-156.27 29.34c30.94 8.14 65.62-20.45 77.46-63.87 11.84-43.42-3.64-85.21-34.58-93.36s-65.62 20.45-77.46 63.87c-11.84 43.42 3.64 85.22 34.58 93.36z"/>
-                                        </svg>
-                                    </p>
-                                    <h5 class="mb-3">{{ pet.name }}</h5>
-                                    <p class="mb-4">{{ pet.breed }}</p>
-                                    <p class="mb-4">{{ pet.date }}</p>
-                                    <p class="mb-4">{{ pet.farewell }}</p>
+
+                                    <div class="row mb 3">
+                                        <div class="col">
+                                            {% if pet.type is same as('dog') %}
+                                                <p>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="currentColor">
+                                                        <path d="M256 224c-79.41 0-192 122.76-192 200.25 0 34.9 26.81 55.75 71.74 55.75 48.84 0 81.09-25.08 120.26-25.08 39.51 0 71.85 25.08 120.26 25.08 44.93 0 71.74-20.85 71.74-55.75C448 346.76 335.41 224 256 224zm-147.28-12.61c-10.4-34.65-42.44-57.09-71.56-50.13-29.12 6.96-44.29 40.69-33.89 75.34 10.4 34.65 42.44 57.09 71.56 50.13 29.12-6.96 44.29-40.69 33.89-75.34zm84.72-20.78c30.94-8.14 46.42-49.94 34.58-93.36s-46.52-72.01-77.46-63.87-46.42 49.94-34.58 93.36c11.84 43.42 46.53 72.02 77.46 63.87zm281.39-29.34c-29.12-6.96-61.15 15.48-71.56 50.13-10.4 34.65 4.77 68.38 33.89 75.34 29.12 6.96 61.15-15.48 71.56-50.13 10.4-34.65-4.77-68.38-33.89-75.34zm-156.27 29.34c30.94 8.14 65.62-20.45 77.46-63.87 11.84-43.42-3.64-85.21-34.58-93.36s-65.62 20.45-77.46 63.87c-11.84 43.42 3.64 85.22 34.58 93.36z"/>
+                                                    </svg>
+                                                </p>
+                                            {% elseif pet.type is same as('cat') %}
+                                                <p>
+                                                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                                        <ellipse cx="50" cy="70" rx="30" ry="20" fill="black"/>
+                                                        <ellipse cx="25" cy="40" rx="10" ry="15" fill="black"/>
+                                                        <ellipse cx="75" cy="40" rx="10" ry="15" fill="black"/>
+                                                        <ellipse cx="40" cy="30" rx="10" ry="15" fill="black"/>
+                                                        <ellipse cx="60" cy="30" rx="10" ry="15" fill="black"/>
+                                                    </svg>
+                                                </p>
+                                            {% elseif pet.type is same as('other') %}
+                                                <p>
+                                                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M20,50 C20,70 80,70 80,50 C80,30 20,30 20,50 Z" fill="#D2691E"/>
+                                                        <circle cx="35" cy="35" r="10" fill="#D2691E"/>
+                                                        <circle cx="65" cy="35" r="10" fill="#D2691E"/>
+                                                        <circle cx="40" cy="65" r="10" fill="#D2691E"/>
+                                                        <circle cx="60" cy="65" r="10" fill="#D2691E"/>
+                                                    </svg>
+                                                </p>
+                                            {%  endif %}
+                                            {{ pet.type }}</div>
+                                        <p class="col">
+                                            <img class="img-fluid" src="{{ pet.candleURL }}" alt=" pet candle ">
+                                        </p>
+                                    </div>
+
+                                    <div class="row mb 3">
+                                        <p class="col">{{ pet.formattedDeathDate }}</p>
+                                    </div>
+                                    <div class="row mb 3">
+                                        <p class="col">{{ pet.name }}</p>
+                                        <p class="col-4">{{ pet.age }}</p>
+                                    </div>
+
+                                    <div class="row mb 3">
+                                        <p class="col-4">{{ pet.breed }}</p>
+                                        <p class="col">{{ pet.date }}</p>
+                                    </div>
+                                    <div class="row mb 3">
+                                        <p class="col">{{ pet.farewell }}</p>
+                                    </div>
+
+
                                 </div>
                             </div>
                             </a>
