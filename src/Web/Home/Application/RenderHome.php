@@ -37,31 +37,25 @@ readonly class RenderHome
         $latestPetsFormatted = [];
         foreach ($latestTributes as $pet) {
             $deathDate = (new DateTime())->setTimestamp((int) $pet->deathDate());
+            $birthDate = (new DateTime())->setTimestamp((int) $pet->birthDate());
 
             $latestPetsFormatted[] = [
                 'name' => $pet->name(),
                 'breed' => $pet->mixedBreed() ? 'mix de ' . $pet->breed() : $pet->breed(),
-                'date' => Date::fromTimestamp($pet->birthDate())->__toString() . ' - '. Date::fromTimestamp($pet->deathDate())->__toString(),
+                'formattedBirthDate' => $birthDate->format('j F Y'),
                 'farewell' => $pet->farewell() ?? $pet->biography(),
                 'photoURL' => $this->getPhoto($pet),
-                'age' => $this->getAge($pet, $deathDate). 'años',
+                'age' => $this->getAge($birthDate, $deathDate). 'años',
                 'formattedDeathDate' => $deathDate->format('j F Y'),
-                'type' => $this->getPetTypeIcon($pet->type()),
-                'candleURL' =>$this->getCandleImgURL()
+                'type' => $this->getPetTypeIcon($pet->type())
             ];
         }
         return $latestPetsFormatted;
     }
 
-    private function getAge(PetTribute $pet, DateTime $deathDate): int
+    private function getAge(DateTime $birthDate, DateTime $deathDate): int
     {
-        $birthDate = (new DateTime())->setTimestamp((int) $pet->birthDate());
         return $birthDate->diff($deathDate)->y;
-    }
-
-    private function getCandleImgURL(): string
-    {
-        return UrlBuilder::candleImage();
     }
 
     private function getPhoto(PetTribute $pet): string
